@@ -369,7 +369,7 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Karla", sans-serif;
   color: var(--oc-gray-7);
 }
 
@@ -378,6 +378,9 @@ body {
   font-size: var(--kegel-12);
   margin-bottom: var(--space-1);
   text-align: center;
+}
+.heading span {
+  border-bottom: 0.5rem solid currentColor;
 }
 
 .hero-w {
@@ -403,6 +406,7 @@ body {
   font-weight: var(--weight-7);
 }
 .hero__img img {
+  border-radius: 50%;
   width: 100%;
   max-width: 30rem;
 }
@@ -435,6 +439,7 @@ body {
   text-align: center;
   margin-bottom: var(--kegel-8);
   text-transform: uppercase;
+  letter-spacing: -0.1rem;
 }
 .card__descr {
   font-size: var(--kegel-6);
