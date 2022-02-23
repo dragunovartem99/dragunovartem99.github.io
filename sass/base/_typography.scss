@@ -8,4 +8,12 @@ html {
 // Just make sure that everything is working
 body {
   font-family: "Roboto", sans-serif;
+  color: var(--oc-gray-7);
+}
+
+.heading {
+  color: var(--oc-gray-9);
+  font-size: var(--kegel-12);
+  margin-bottom: var(--space-1);
+  text-align: center;
 }

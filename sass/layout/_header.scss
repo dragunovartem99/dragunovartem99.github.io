@@ -1,0 +1,10 @@
+@use "../abstracts" as *;
+
+.header {
+  background-color: var(--oc-gray-9);
+  padding: var(--kegel-5) var(--kegel-10);
+  &__logo {
+    font-size: var(--kegel-10);
+    color: var(--oc-white);
+  }
+}
