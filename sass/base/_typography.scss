@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+// For rem units working properly
+html {
+  font-size: 62.5%;
+}
+
+// Just make sure that everything is working
+body {
+  font-family: "Roboto", sans-serif;
+}

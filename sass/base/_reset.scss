@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+// Kill standard styles
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+// Better behavior for sizing
+body {
+  box-sizing: border-box;
+}
