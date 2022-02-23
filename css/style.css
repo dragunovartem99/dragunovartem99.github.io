@@ -384,7 +384,7 @@ body {
 }
 
 .hero-w {
-  background-color: var(--oc-gray-8);
+  background-image: linear-gradient(to bottom right, var(--oc-gray-7), var(--oc-gray-9));
 }
 
 .hero {
