@@ -3,6 +3,22 @@
 .header {
   background-color: var(--oc-gray-9);
   padding: var(--kegel-5) var(--kegel-10);
+  display: flex;
+  justify-content: space-between;
+
+  &__nav {
+    list-style: none;
+    display: flex;
+    gap: var(--kegel-10);
+    align-items: center;
+
+    &__item a {
+      color: var(--oc-white);
+      font-size: var(--kegel-8);
+      text-decoration: none;
+    }
+  }
+
   &__logo {
     font-size: var(--kegel-10);
     color: var(--oc-white);

@@ -18,13 +18,23 @@
 
   <body>
     <header class="header">
-      <h1 class="header__logo">dragunovartem99</h1>
+      <ul role="navigation" class="header__nav">
+        <li class="header__nav__item">
+          <a href="#works">Works</a>
+        </li>
+        <li class="header__nav__item">
+          <a href="">Skillset</a>
+        </li>
+        <li class="header__nav__item">
+          <a href="">Learning</a>
+        </li>
+      </ul>
+      <h1 class="header__logo"><span>dragunovartem</span>99</h1>
     </header>
 
     <div class="hero-w">
       <section class="hero container">
         <div class="hero__content">
-          <span class="hero__text">hi, my name is</span>
           <div class="hero__name">Artem Dragunov</div>
           <span class="hero__text">web developer & designer</span>
         </div>
@@ -34,7 +44,7 @@
       </section>
     </div>
 
-    <section class="portfolio container">
+    <section id="works" class="portfolio container">
       <h2 class="heading">
         Let's create something <span>wonderful</span> together!
       </h2>
@@ -248,6 +258,7 @@
             </ul>
           </div>
         </a>
+
         <a href="/natours" target="_blank" class="card">
           <img
             class="card__img"
@@ -317,6 +328,7 @@
             </ul>
           </div>
         </a>
+
         <a href="/kurtis-classroom" target="_blank" class="card">
           <img
             class="card__img"
@@ -459,15 +471,58 @@
       </div>
     </section>
 
-    <section class="skills container">
-      <h2 class="heading">Skillset</h2>
-      <ul>
-        <li>Modern HTML & CSS</li>
-        <li>Responsive design</li>
-        <li>SASS & PostCSS</li>
-        <li>BEM naming convention</li>
-        <li>7-1 architecture</li>
-      </ul>
+    <section class="features container">
+      <h2 class="heading">Carefully developed <span>skillset</span></h2>
+      <div class="features__grid">
+        <div class="features__img">&nbsp;</div>
+        <div class="features__content">
+          <ul class="features__list">
+            <li class="feature">
+              <div class="feature__title">Modern HTML & CSS</div>
+              <p class="feature__text">
+                Flexbox and Grid is a way to create any creative flexible
+                design.
+              </p>
+            </li>
+            <li class="feature">
+              <div class="feature__title">Responsive design</div>
+              <p class="feature__text">
+                With media queries I can make your website look good at any
+                screen of any device.
+              </p>
+            </li>
+            <li class="feature">
+              <div class="feature__title">7-1 architecture</div>
+              <p class="feature__text">
+                I use this technique to perfectly organize and maintain code.
+                <a href="https://github.com/dragunovartem99?tab=repositories"
+                  >Check it by yourself.</a
+                >
+              </p>
+            </li>
+            <li class="feature">
+              <div class="feature__title">SASS & PostCSS</div>
+              <p class="feature__text">
+                Killer modifications to help make things done quicker, website
+                faster, and browser support wider.
+              </p>
+            </li>
+            <li class="feature">
+              <div class="feature__title">And more!</div>
+              <p class="feature__text">
+                BEM, Tailwind, Bootstrap, Astro SSG, Open Props and still
+                learning.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
+
+    <div class="edu-w">
+      <section class="edu">
+        <h2 class="heading"><span>Learning</span> every day</h2>
+      </section>
+    </div>
   </body>
 </html>

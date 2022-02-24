@@ -1,0 +1,38 @@
+@use "../abstracts" as *;
+
+.features {
+  padding-block: var(--space-1);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-1);
+  }
+
+  &__img {
+    background-size: cover;
+    background-image: url(../img/altumcode-dMUt0X3f59Q-unsplash.jpg);
+    background-position: right;
+  }
+}
+
+.features__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kegel-15);
+}
+
+.feature {
+  &__title {
+    font-size: var(--kegel-12);
+    font-weight: var(--weight-7);
+    text-transform: uppercase;
+    margin-bottom: var(--kegel-1);
+    color: var(--oc-gray-8);
+  }
+
+  &__text {
+    font-size: var(--kegel-8);
+  }
+}

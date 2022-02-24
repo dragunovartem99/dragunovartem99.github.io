@@ -12,6 +12,11 @@ body {
   color: var(--oc-gray-7);
 }
 
+::selection {
+  background-color: var(--oc-gray-7);
+  color: var(--oc-white);
+}
+
 .heading {
   color: var(--oc-gray-9);
   font-size: var(--kegel-12);

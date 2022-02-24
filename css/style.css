@@ -373,6 +373,11 @@ body {
   color: var(--oc-gray-7);
 }
 
+::selection {
+  background-color: var(--oc-gray-7);
+  color: var(--oc-white);
+}
+
 .heading {
   color: var(--oc-gray-9);
   font-size: var(--kegel-12);
@@ -384,7 +389,7 @@ body {
 }
 
 .hero-w {
-  background-image: linear-gradient(to bottom right, var(--oc-gray-7), var(--oc-gray-9));
+  background-image: linear-gradient(to bottom right, var(--oc-gray-8), var(--oc-gray-9));
 }
 
 .hero {
@@ -464,6 +469,46 @@ body {
   font-size: var(--kegel-6);
 }
 
+.features {
+  padding-block: var(--space-1);
+}
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-1);
+}
+.features__img {
+  background-size: cover;
+  background-image: url(../img/altumcode-dMUt0X3f59Q-unsplash.jpg);
+  background-position: right;
+}
+
+.features__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kegel-15);
+}
+
+.feature__title {
+  font-size: var(--kegel-12);
+  font-weight: var(--weight-7);
+  text-transform: uppercase;
+  margin-bottom: var(--kegel-1);
+  color: var(--oc-gray-8);
+}
+.feature__text {
+  font-size: var(--kegel-8);
+}
+
+.edu-w {
+  background-color: var(--oc-gray-0);
+}
+
+.edu {
+  padding-block: var(--space-1);
+}
+
 .container {
   max-width: 120rem;
   margin-inline: auto;
@@ -472,6 +517,19 @@ body {
 .header {
   background-color: var(--oc-gray-9);
   padding: var(--kegel-5) var(--kegel-10);
+  display: flex;
+  justify-content: space-between;
+}
+.header__nav {
+  list-style: none;
+  display: flex;
+  gap: var(--kegel-10);
+  align-items: center;
+}
+.header__nav__item a {
+  color: var(--oc-white);
+  font-size: var(--kegel-8);
+  text-decoration: none;
 }
 .header__logo {
   font-size: var(--kegel-10);
