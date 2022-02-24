@@ -3,4 +3,9 @@
 .container {
   max-width: 120rem;
   margin-inline: auto;
+  padding-inline: var(--kegel-3);
+
+  @include mq(md) {
+    padding-inline: var(--kegel-7);
+  }
 }

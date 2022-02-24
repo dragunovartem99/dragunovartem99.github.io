@@ -1,36 +1,71 @@
 @use "../abstracts" as *;
 
 .hero-w {
-  background-image: linear-gradient(
-    to bottom right,
-    var(--oc-gray-8),
-    var(--oc-gray-9)
-  );
+  background-image: url("../img/artem.jpg");
+  background-size: cover;
+  background-position: top;
+
+  @include mq(sm) {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--oc-gray-8),
+      var(--oc-gray-9)
+    );
+  }
 }
 
 .hero {
+  // margin-top: var(--space-1);
+
+  min-height: var(--space-15);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+  align-items: end;
+
+  @include mq(sm) {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    padding-block: var(--space-1);
+  }
   gap: var(--space-1);
-  padding-block: var(--space-7) var(--space-1);
+  padding-block: var(--space-7) var(--kegel-5);
+
   color: var(--oc-white);
 
   &__content {
-    justify-self: end;
+    padding: var(--kegel-5);
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    @include mq(sm) {
+      justify-self: end;
+      background-color: unset;
+      padding: none;
+    }
   }
 
   &__text {
-    font-size: var(--kegel-10);
+    font-size: var(--kegel-7);
+    @include mq(md) {
+      font-size: var(--kegel-10);
+    }
   }
 
   &__name {
-    font-size: var(--kegel-15);
+    font-size: var(--kegel-12);
     font-weight: var(--weight-7);
+
+    @include mq(md) {
+      font-size: var(--kegel-15);
+    }
   }
 
   &__img {
+    display: none;
+    @include mq(sm) {
+      display: block;
+    }
+
     img {
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
       border-radius: 50%;
       width: 100%;
       max-width: 30rem;

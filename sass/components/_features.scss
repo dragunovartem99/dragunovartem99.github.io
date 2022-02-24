@@ -5,11 +5,16 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
     gap: var(--space-1);
   }
 
   &__img {
+    min-height: var(--space-10);
     background-size: cover;
     background-image: url(../img/altumcode-dMUt0X3f59Q-unsplash.jpg);
     background-position: right;
@@ -30,6 +35,11 @@
     text-transform: uppercase;
     margin-bottom: var(--kegel-1);
     color: var(--oc-gray-8);
+
+    span {
+      color: var(--oc-red-5);
+      margin-right: var(--kegel-1);
+    }
   }
 
   &__text {

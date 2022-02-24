@@ -366,7 +366,17 @@ body {
 }
 html {
   scroll-behavior: smooth;
-  font-size: 62.5%;
+  font-size: 50%;
+}
+@media only screen and (min-width: 48em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media only screen and (min-width: 64em) {
+  html {
+    font-size: 62.5%;
+  }
 }
 
 body {
@@ -384,6 +394,7 @@ body {
   font-size: var(--kegel-12);
   margin-bottom: var(--space-1);
   text-align: center;
+  line-height: var(--height-3);
 }
 .heading span {
   border-bottom: 0.5rem solid currentColor;
@@ -391,28 +402,70 @@ body {
 }
 
 .hero-w {
-  background-image: linear-gradient(to bottom right, var(--oc-gray-8), var(--oc-gray-9));
+  background-image: url("../img/artem.jpg");
+  background-size: cover;
+  background-position: top;
+}
+@media only screen and (min-width: 30em) {
+  .hero-w {
+    background-image: linear-gradient(to bottom right, var(--oc-gray-8), var(--oc-gray-9));
+  }
 }
 
 .hero {
+  min-height: var(--space-15);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+  align-items: end;
   gap: var(--space-1);
-  padding-block: var(--space-7) var(--space-1);
+  padding-block: var(--space-7) var(--kegel-5);
   color: var(--oc-white);
 }
+@media only screen and (min-width: 30em) {
+  .hero {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    padding-block: var(--space-1);
+  }
+}
 .hero__content {
-  justify-self: end;
+  padding: var(--kegel-5);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+@media only screen and (min-width: 30em) {
+  .hero__content {
+    justify-self: end;
+    background-color: unset;
+    padding: none;
+  }
 }
 .hero__text {
-  font-size: var(--kegel-10);
+  font-size: var(--kegel-7);
+}
+@media only screen and (min-width: 48em) {
+  .hero__text {
+    font-size: var(--kegel-10);
+  }
 }
 .hero__name {
-  font-size: var(--kegel-15);
+  font-size: var(--kegel-12);
   font-weight: var(--weight-7);
 }
+@media only screen and (min-width: 48em) {
+  .hero__name {
+    font-size: var(--kegel-15);
+  }
+}
+.hero__img {
+  display: none;
+}
+@media only screen and (min-width: 30em) {
+  .hero__img {
+    display: block;
+  }
+}
 .hero__img img {
+  object-fit: cover;
+  aspect-ratio: 1/1;
   border-radius: 50%;
   width: 100%;
   max-width: 30rem;
@@ -425,7 +478,7 @@ body {
 .cards {
   display: grid;
   gap: var(--space-1);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
 .card {
@@ -476,10 +529,16 @@ body {
 }
 .features__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-1);
 }
+@media only screen and (min-width: 48em) {
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .features__img {
+  min-height: var(--space-10);
   background-size: cover;
   background-image: url(../img/altumcode-dMUt0X3f59Q-unsplash.jpg);
   background-position: right;
@@ -499,6 +558,10 @@ body {
   margin-bottom: var(--kegel-1);
   color: var(--oc-gray-8);
 }
+.feature__title span {
+  color: var(--oc-red-5);
+  margin-right: var(--kegel-1);
+}
 .feature__text {
   font-size: var(--kegel-8);
 }
@@ -514,27 +577,50 @@ body {
 .container {
   max-width: 120rem;
   margin-inline: auto;
+  padding-inline: var(--kegel-3);
+}
+@media only screen and (min-width: 48em) {
+  .container {
+    padding-inline: var(--kegel-7);
+  }
+}
+
+.header-w {
+  background-color: var(--oc-gray-9);
+  width: 100%;
 }
 
 .header {
-  position: fixed;
-  width: 100%;
-  background-color: var(--oc-gray-9);
-  padding: var(--kegel-5) var(--kegel-10);
+  height: var(--space-1);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+}
+@media only screen and (min-width: 48em) {
+  .header {
+    justify-content: space-between;
+  }
 }
 .header__nav {
   list-style: none;
   display: flex;
-  gap: var(--kegel-10);
+  gap: var(--kegel-5);
   align-items: center;
+}
+@media only screen and (min-width: 30em) {
+  .header__nav {
+    gap: var(--kegel-10);
+  }
 }
 .header__nav__item a {
   color: var(--oc-white);
-  font-size: var(--kegel-8);
+  font-size: var(--kegel-7);
   text-decoration: none;
+}
+@media only screen and (min-width: 30em) {
+  .header__nav__item a {
+    font-size: var(--kegel-8);
+  }
 }
 .header__nav__item a:hover {
   color: var(--oc-red-5);
@@ -558,6 +644,12 @@ body {
 .header__logo {
   font-size: var(--kegel-10);
   color: var(--oc-white);
+  display: none;
+}
+@media only screen and (min-width: 48em) {
+  .header__logo {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

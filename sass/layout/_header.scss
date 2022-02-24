@@ -1,23 +1,40 @@
 @use "../abstracts" as *;
 
-.header {
-  position: fixed;
-  width: 100%;
+.header-w {
   background-color: var(--oc-gray-9);
-  padding: var(--kegel-5) var(--kegel-10);
+  // position: fixed;
+  width: 100%;
+}
+
+.header {
+  height: var(--space-1);
   display: flex;
-  justify-content: space-between;
+
+  justify-content: center;
+
+  @include mq(md) {
+    justify-content: space-between;
+  }
   align-items: center;
 
   &__nav {
     list-style: none;
     display: flex;
-    gap: var(--kegel-10);
+    gap: var(--kegel-5);
+
+    @include mq(sm) {
+      gap: var(--kegel-10);
+    }
     align-items: center;
 
     &__item a {
       color: var(--oc-white);
-      font-size: var(--kegel-8);
+
+      font-size: var(--kegel-7);
+
+      @include mq(sm) {
+        font-size: var(--kegel-8);
+      }
       text-decoration: none;
 
       &:hover {
@@ -49,5 +66,10 @@
   &__logo {
     font-size: var(--kegel-10);
     color: var(--oc-white);
+    display: none;
+
+    @include mq(md) {
+      display: block;
+    }
   }
 }

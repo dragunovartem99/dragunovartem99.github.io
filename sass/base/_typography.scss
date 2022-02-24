@@ -3,7 +3,14 @@
 // For rem units working properly
 html {
   scroll-behavior: smooth;
-  font-size: 62.5%;
+  font-size: 50%;
+  @include mq(md) {
+    font-size: 56.25%;
+  }
+
+  @include mq(lg) {
+    font-size: 62.5%;
+  }
 }
 
 // Just make sure that everything is working
@@ -23,6 +30,7 @@ body {
   font-size: var(--kegel-12);
   margin-bottom: var(--space-1);
   text-align: center;
+  line-height: var(--height-3);
 
   span {
     border-bottom: 0.5rem solid currentColor;
