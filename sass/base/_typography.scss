@@ -2,6 +2,7 @@
 
 // For rem units working properly
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%;
 }
 
@@ -13,7 +14,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--oc-gray-7);
+  background-color: var(--oc-red-5);
   color: var(--oc-white);
 }
 
@@ -25,5 +26,6 @@ body {
 
   span {
     border-bottom: 0.5rem solid currentColor;
+    color: var(--oc-red-5);
   }
 }

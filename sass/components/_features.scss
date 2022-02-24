@@ -1,7 +1,7 @@
 @use "../abstracts" as *;
 
 .features {
-  padding-block: var(--space-1);
+  padding-block: var(--space-3);
 
   &__grid {
     display: grid;

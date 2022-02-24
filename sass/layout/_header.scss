@@ -1,10 +1,13 @@
 @use "../abstracts" as *;
 
 .header {
+  position: fixed;
+  width: 100%;
   background-color: var(--oc-gray-9);
   padding: var(--kegel-5) var(--kegel-10);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   &__nav {
     list-style: none;
@@ -16,6 +19,30 @@
       color: var(--oc-white);
       font-size: var(--kegel-8);
       text-decoration: none;
+
+      &:hover {
+        color: var(--oc-red-5);
+      }
+    }
+
+    &__item--btn {
+      background-color: var(--oc-gray-3);
+      padding: 0.5rem var(--kegel-5);
+      cursor: pointer;
+
+      a {
+        color: var(--oc-gray-9);
+        font-weight: var(--weight-7);
+        letter-spacing: -0.1rem;
+      }
+
+      &:hover {
+        background-color: var(--oc-red-5);
+
+        a {
+          color: var(--oc-white);
+        }
+      }
     }
   }
 
