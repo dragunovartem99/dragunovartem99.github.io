@@ -487,23 +487,36 @@ body {
   background-color: var(--oc-gray-0);
   color: var(--oc-gray-9);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 2rem 2rem rgba(var(--oc-red-9-rgb), 0.2);
+  transform: translateY(-1rem);
 }
 .card__img {
+  padding-block: var(--kegel-5);
+}
+.card__img img {
   width: 100%;
 }
 .card__content {
-  padding: var(--kegel-8) var(--kegel-12) var(--kegel-12);
+  padding: var(--kegel-1) var(--kegel-12) var(--kegel-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kegel-8);
 }
 .card__name {
-  font-size: var(--kegel-10);
+  font-size: var(--kegel-9);
   text-align: center;
-  margin-bottom: var(--kegel-8);
   text-transform: uppercase;
   letter-spacing: -0.1rem;
+  background-color: var(--oc-gray-7);
+  color: var(--oc-white);
+  margin-bottom: var(--kegel-5);
 }
 .card__descr {
   font-size: var(--kegel-6);
-  margin-bottom: var(--kegel-8);
+  line-height: var(--height-5);
   color: var(--oc-gray-7);
 }
 .card__list {
@@ -511,6 +524,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--kegel-3);
+  margin-bottom: auto;
 }
 .card__list__item {
   display: flex;
