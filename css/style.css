@@ -588,6 +588,34 @@ body {
   padding-block: var(--space-1);
 }
 
+.small-projects {
+  padding-block: var(--space-3);
+}
+
+.small-project {
+  text-decoration: none;
+  color: inherit;
+  display: grid;
+  gap: var(--space-1);
+  grid-template-columns: 1fr 2fr;
+}
+.small-project__img img {
+  width: 100%;
+}
+.small-project__name {
+  display: inline-block;
+  padding-inline: 1em;
+  font-size: var(--kegel-11);
+  text-transform: uppercase;
+  letter-spacing: -0.1rem;
+  background-color: var(--oc-gray-7);
+  color: var(--oc-white);
+  margin-bottom: var(--kegel-5);
+}
+.small-project__descr {
+  font-size: var(--kegel-6);
+}
+
 .container {
   max-width: 120rem;
   margin-inline: auto;
