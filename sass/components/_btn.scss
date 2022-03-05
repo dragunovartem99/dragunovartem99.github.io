@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+.btn {
+  background-color: var(--oc-red-5);
+  font-size: var(--kegel-6);
+  padding: 1em 3em;
+  color: var(--oc-white);
+  text-decoration: none;
+  display: inline-block;
+  font-weight: var(--weight-7);
+}

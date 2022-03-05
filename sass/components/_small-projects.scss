@@ -20,16 +20,16 @@
 
   &__name {
     display: inline-block;
-    padding-inline: 1em;
-    font-size: var(--kegel-11);
+    font-size: var(--kegel-9);
     text-transform: uppercase;
     letter-spacing: -0.1rem;
-    background-color: var(--oc-gray-7);
-    color: var(--oc-white);
     margin-bottom: var(--kegel-5);
+    font-weight: var(--weight-7);
+    color: var(--oc-gray-8);
   }
 
   &__descr {
     font-size: var(--kegel-6);
+    margin-bottom: var(--kegel-8);
   }
 }

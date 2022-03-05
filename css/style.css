@@ -471,7 +471,7 @@ body {
   max-width: 30rem;
 }
 
-.portfolio {
+#websites {
   padding-block: var(--space-3);
 }
 
@@ -604,16 +604,26 @@ body {
 }
 .small-project__name {
   display: inline-block;
-  padding-inline: 1em;
-  font-size: var(--kegel-11);
+  font-size: var(--kegel-9);
   text-transform: uppercase;
   letter-spacing: -0.1rem;
-  background-color: var(--oc-gray-7);
-  color: var(--oc-white);
   margin-bottom: var(--kegel-5);
+  font-weight: var(--weight-7);
+  color: var(--oc-gray-8);
 }
 .small-project__descr {
   font-size: var(--kegel-6);
+  margin-bottom: var(--kegel-8);
+}
+
+.btn {
+  background-color: var(--oc-red-5);
+  font-size: var(--kegel-6);
+  padding: 1em 3em;
+  color: var(--oc-white);
+  text-decoration: none;
+  display: inline-block;
+  font-weight: var(--weight-7);
 }
 
 .container {
