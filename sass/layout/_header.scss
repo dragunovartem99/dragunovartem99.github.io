@@ -2,73 +2,59 @@
 
 .header-w {
   background-color: var(--oc-gray-9);
-  // position: fixed;
-  width: 100%;
 }
 
 .header {
-  height: var(--space-1);
+  padding-block: var(--kegel-5);
   display: flex;
-
   justify-content: center;
+  align-items: center;
 
-  @include mq(md) {
+  @include mq("tabPort") {
     justify-content: space-between;
   }
-  align-items: center;
 
   &__nav {
     list-style: none;
     display: flex;
     gap: var(--kegel-5);
-
-    @include mq(sm) {
-      gap: var(--kegel-10);
-    }
     align-items: center;
 
-    &__item a {
-      color: var(--oc-white);
+    @include mq("tabLand") {
+      gap: var(--kegel-10);
+    }
+  }
 
-      font-size: var(--kegel-7);
+  &__link {
+    color: var(--oc-white);
+    text-decoration: none;
+    font-size: var(--kegel-7);
 
-      @include mq(sm) {
-        font-size: var(--kegel-8);
-      }
-      text-decoration: none;
-
-      &:hover {
-        color: var(--oc-red-5);
-      }
+    &:hover {
+      color: var(--oc-red-5);
     }
 
-    &__item--btn {
+    &--btn {
       background-color: var(--oc-gray-3);
       padding: 0.5rem var(--kegel-5);
       cursor: pointer;
-
-      a {
-        color: var(--oc-gray-9);
-        font-weight: var(--weight-7);
-        letter-spacing: -0.1rem;
-      }
+      color: var(--oc-gray-9);
+      font-weight: var(--weight-7);
+      letter-spacing: -0.1rem;
 
       &:hover {
         background-color: var(--oc-red-5);
-
-        a {
-          color: var(--oc-white);
-        }
+        color: var(--oc-white);
       }
     }
   }
 
   &__logo {
-    font-size: var(--kegel-10);
+    font-size: var(--kegel-8);
     color: var(--oc-white);
     display: none;
 
-    @include mq(md) {
+    @include mq("tabPort") {
       display: block;
     }
   }

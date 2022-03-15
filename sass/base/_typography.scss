@@ -9,7 +9,7 @@ html {
     font-size: 56.25%;
   }
 
-  @include mq("tabLand") {
+  @include mq("pcHD") {
     font-size: 62.5%;
   }
 }

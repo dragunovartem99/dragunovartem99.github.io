@@ -373,7 +373,7 @@ html {
     font-size: 56.25%;
   }
 }
-@media only screen and (min-width: 60em) {
+@media only screen and (min-width: 80em) {
   html {
     font-size: 62.5%;
   }
@@ -401,46 +401,79 @@ body {
   color: var(--oc-red-5);
 }
 
-@media only screen and (min-width: 100em) {
-  body {
-    background-color: red;
-  }
-}
-
 .hero-w {
   background-image: url("../img/artem.jpg");
   background-size: cover;
   background-position: top;
 }
+@media only screen and (min-width: 37.5em) {
+  .hero-w {
+    background-image: linear-gradient(to bottom right, var(--oc-gray-8), var(--oc-gray-9));
+  }
+}
 
 .hero {
-  min-height: var(--space-15);
-  display: grid;
+  display: flex;
   align-items: end;
-  gap: var(--space-1);
-  padding-block: var(--space-7) var(--kegel-5);
+  justify-content: start;
+  gap: var(--kegel-15);
+  min-height: var(--space-15);
+  padding-block: var(--kegel-15);
   color: var(--oc-white);
+}
+@media only screen and (min-width: 37.5em) {
+  .hero {
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media only screen and (min-width: 60em) {
+  .hero {
+    gap: var(--space-1);
+  }
 }
 .hero__content {
   padding: var(--kegel-5);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+@media only screen and (min-width: 37.5em) {
+  .hero__content {
+    background-color: unset;
+    padding: 0;
+    align-self: unset;
+  }
 }
 .hero__text {
-  font-size: var(--kegel-7);
+  font-size: var(--kegel-8);
+}
+@media only screen and (min-width: 60em) {
+  .hero__text {
+    font-size: var(--kegel-10);
+  }
 }
 .hero__name {
-  font-size: var(--kegel-12);
+  font-size: var(--kegel-13);
   font-weight: var(--weight-7);
+}
+@media only screen and (min-width: 60em) {
+  .hero__name {
+    font-size: var(--kegel-15);
+  }
 }
 .hero__img {
   display: none;
+}
+@media only screen and (min-width: 37.5em) {
+  .hero__img {
+    display: block;
+    width: 35%;
+  }
 }
 .hero__img img {
   object-fit: cover;
   aspect-ratio: 1/1;
   border-radius: 50%;
   width: 100%;
-  max-width: 30rem;
 }
 
 #websites {
@@ -621,20 +654,24 @@ body {
 
 .container {
   max-width: 110rem;
-  margin-inline: auto;
   width: 90%;
+  margin-inline: auto;
 }
 
 .header-w {
   background-color: var(--oc-gray-9);
-  width: 100%;
 }
 
 .header {
-  height: var(--space-1);
+  padding-block: var(--kegel-5);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media only screen and (min-width: 37.5em) {
+  .header {
+    justify-content: space-between;
+  }
 }
 .header__nav {
   list-style: none;
@@ -642,34 +679,40 @@ body {
   gap: var(--kegel-5);
   align-items: center;
 }
-.header__nav__item a {
-  color: var(--oc-white);
-  font-size: var(--kegel-7);
-  text-decoration: none;
+@media only screen and (min-width: 60em) {
+  .header__nav {
+    gap: var(--kegel-10);
+  }
 }
-.header__nav__item a:hover {
+.header__link {
+  color: var(--oc-white);
+  text-decoration: none;
+  font-size: var(--kegel-7);
+}
+.header__link:hover {
   color: var(--oc-red-5);
 }
-.header__nav__item--btn {
+.header__link--btn {
   background-color: var(--oc-gray-3);
   padding: 0.5rem var(--kegel-5);
   cursor: pointer;
-}
-.header__nav__item--btn a {
   color: var(--oc-gray-9);
   font-weight: var(--weight-7);
   letter-spacing: -0.1rem;
 }
-.header__nav__item--btn:hover {
+.header__link--btn:hover {
   background-color: var(--oc-red-5);
-}
-.header__nav__item--btn:hover a {
   color: var(--oc-white);
 }
 .header__logo {
-  font-size: var(--kegel-10);
+  font-size: var(--kegel-8);
   color: var(--oc-white);
   display: none;
+}
+@media only screen and (min-width: 37.5em) {
+  .header__logo {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
