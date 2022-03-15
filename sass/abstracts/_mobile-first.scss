@@ -1,40 +1,22 @@
-//Media Queries Based on Chrome Web Tools
-
 @mixin mq($breakpoint) {
-  @if $breakpoint == xs {
-    // 320px — Mobile S
-    @media only screen and (min-width: 20em) {
+  @if $breakpoint == "tabPort" {
+    @media only screen and (min-width: 37.5em) {
       @content;
     }
   }
 
-  @if $breakpoint == sm {
-    // 480px — Mobile L
-    @media only screen and (min-width: 30em) {
+  @if $breakpoint == "tabLand" {
+    @media only screen and (min-width: 60em) {
       @content;
     }
   }
-  @if $breakpoint == md {
-    // 768px — Tablet
-    @media only screen and (min-width: 48em) {
+  @if $breakpoint == "pcHD" {
+    @media only screen and (min-width: 80em) {
       @content;
     }
   }
-  @if $breakpoint == lg {
-    // 1024px — Laptop
-    @media only screen and (min-width: 64em) {
-      @content;
-    }
-  }
-  @if $breakpoint == xl {
-    // 1440px — Laptop L
-    @media only screen and (min-width: 90em) {
-      @content;
-    }
-  }
-  @if $breakpoint == 4k {
-    // 2560px — 4K
-    @media only screen and (min-width: 160em) {
+  @if $breakpoint == "pcHD+" {
+    @media only screen and (min-width: 100em) {
       @content;
     }
   }

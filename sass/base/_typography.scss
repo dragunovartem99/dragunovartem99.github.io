@@ -4,11 +4,12 @@
 html {
   scroll-behavior: smooth;
   font-size: 50%;
-  @include mq(md) {
+
+  @include mq("tabPort") {
     font-size: 56.25%;
   }
 
-  @include mq(lg) {
+  @include mq("tabLand") {
     font-size: 62.5%;
   }
 }

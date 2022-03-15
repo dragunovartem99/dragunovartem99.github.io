@@ -7,3 +7,32 @@
 .edu {
   padding-block: var(--space-1);
 }
+
+.edu__companies {
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-around;
+
+  img {
+    height: var(--kegel-10);
+    filter: brightness(0);
+    opacity: 0.5;
+  }
+
+  margin-bottom: var(--space-1);
+}
+
+.edu__info {
+  display: flex;
+  > * {
+    width: 100%;
+  }
+}
+
+.edu__documents {
+  border: 0.3rem solid var(--oc-red-5);
+
+  img {
+    width: 100%;
+  }
+}

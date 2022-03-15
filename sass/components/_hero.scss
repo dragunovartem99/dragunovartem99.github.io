@@ -1,5 +1,11 @@
 @use "../abstracts" as *;
 
+body {
+  @include mq("pcHD+") {
+    background-color: red;
+  }
+}
+
 .hero-w {
   background-image: url("../img/artem.jpg");
   background-size: cover;

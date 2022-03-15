@@ -1,11 +1,7 @@
 @use "../abstracts" as *;
 
 .container {
-  max-width: 120rem;
+  max-width: 110rem;
   margin-inline: auto;
-  padding-inline: var(--kegel-3);
-
-  @include mq(md) {
-    padding-inline: var(--kegel-7);
-  }
+  width: 90%;
 }

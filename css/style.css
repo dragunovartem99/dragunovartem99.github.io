@@ -368,12 +368,12 @@ html {
   scroll-behavior: smooth;
   font-size: 50%;
 }
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: 37.5em) {
   html {
     font-size: 56.25%;
   }
 }
-@media only screen and (min-width: 64em) {
+@media only screen and (min-width: 60em) {
   html {
     font-size: 62.5%;
   }
@@ -401,15 +401,16 @@ body {
   color: var(--oc-red-5);
 }
 
+@media only screen and (min-width: 100em) {
+  body {
+    background-color: red;
+  }
+}
+
 .hero-w {
   background-image: url("../img/artem.jpg");
   background-size: cover;
   background-position: top;
-}
-@media only screen and (min-width: 30em) {
-  .hero-w {
-    background-image: linear-gradient(to bottom right, var(--oc-gray-8), var(--oc-gray-9));
-  }
 }
 
 .hero {
@@ -420,48 +421,19 @@ body {
   padding-block: var(--space-7) var(--kegel-5);
   color: var(--oc-white);
 }
-@media only screen and (min-width: 30em) {
-  .hero {
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    padding-block: var(--space-1);
-  }
-}
 .hero__content {
   padding: var(--kegel-5);
   background-color: rgba(0, 0, 0, 0.5);
 }
-@media only screen and (min-width: 30em) {
-  .hero__content {
-    justify-self: end;
-    background-color: unset;
-    padding: none;
-  }
-}
 .hero__text {
   font-size: var(--kegel-7);
-}
-@media only screen and (min-width: 48em) {
-  .hero__text {
-    font-size: var(--kegel-10);
-  }
 }
 .hero__name {
   font-size: var(--kegel-12);
   font-weight: var(--weight-7);
 }
-@media only screen and (min-width: 48em) {
-  .hero__name {
-    font-size: var(--kegel-15);
-  }
-}
 .hero__img {
   display: none;
-}
-@media only screen and (min-width: 30em) {
-  .hero__img {
-    display: block;
-  }
 }
 .hero__img img {
   object-fit: cover;
@@ -546,11 +518,6 @@ body {
   grid-template-columns: 1fr;
   gap: var(--space-1);
 }
-@media only screen and (min-width: 48em) {
-  .features__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 .features__img {
   min-height: var(--space-10);
   background-size: cover;
@@ -586,6 +553,32 @@ body {
 
 .edu {
   padding-block: var(--space-1);
+}
+
+.edu__companies {
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: var(--space-1);
+}
+.edu__companies img {
+  height: var(--kegel-10);
+  filter: brightness(0);
+  opacity: 0.5;
+}
+
+.edu__info {
+  display: flex;
+}
+.edu__info > * {
+  width: 100%;
+}
+
+.edu__documents {
+  border: 0.3rem solid var(--oc-red-5);
+}
+.edu__documents img {
+  width: 100%;
 }
 
 .small-projects {
@@ -627,14 +620,9 @@ body {
 }
 
 .container {
-  max-width: 120rem;
+  max-width: 110rem;
   margin-inline: auto;
-  padding-inline: var(--kegel-3);
-}
-@media only screen and (min-width: 48em) {
-  .container {
-    padding-inline: var(--kegel-7);
-  }
+  width: 90%;
 }
 
 .header-w {
@@ -648,31 +636,16 @@ body {
   justify-content: center;
   align-items: center;
 }
-@media only screen and (min-width: 48em) {
-  .header {
-    justify-content: space-between;
-  }
-}
 .header__nav {
   list-style: none;
   display: flex;
   gap: var(--kegel-5);
   align-items: center;
 }
-@media only screen and (min-width: 30em) {
-  .header__nav {
-    gap: var(--kegel-10);
-  }
-}
 .header__nav__item a {
   color: var(--oc-white);
   font-size: var(--kegel-7);
   text-decoration: none;
-}
-@media only screen and (min-width: 30em) {
-  .header__nav__item a {
-    font-size: var(--kegel-8);
-  }
 }
 .header__nav__item a:hover {
   color: var(--oc-red-5);
@@ -697,11 +670,6 @@ body {
   font-size: var(--kegel-10);
   color: var(--oc-white);
   display: none;
-}
-@media only screen and (min-width: 48em) {
-  .header__logo {
-    display: block;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */
