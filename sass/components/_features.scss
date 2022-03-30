@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: 1fr;
 
-    @include mq(md) {
+    @include mq("tabLand") {
       grid-template-columns: repeat(2, 1fr);
     }
     gap: var(--space-1);

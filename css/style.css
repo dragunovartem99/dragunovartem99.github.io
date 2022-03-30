@@ -551,6 +551,11 @@ body {
   grid-template-columns: 1fr;
   gap: var(--space-1);
 }
+@media only screen and (min-width: 60em) {
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .features__img {
   min-height: var(--space-10);
   background-size: cover;
@@ -607,8 +612,13 @@ body {
   width: 100%;
 }
 
+.edu__text {
+  font-size: var(--kegel-7);
+}
+
 .edu__documents {
-  border: 0.3rem solid var(--oc-red-5);
+  border: 0.3rem solid var(--oc-gray-5);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 .edu__documents img {
   width: 100%;
