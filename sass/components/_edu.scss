@@ -1,9 +1,5 @@
 @use "../abstracts" as *;
 
-.edu-w {
-  background-color: var(--oc-gray-0);
-}
-
 .edu {
   padding-block: var(--space-1);
 }
@@ -22,22 +18,83 @@
   margin-bottom: var(--space-1);
 }
 
+.edu__title {
+  font-size: var(--kegel-10);
+  color: var(--oc-gray-9);
+  font-weight: var(--weight-9);
+}
+
+.edu__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kegel-8);
+}
+
+.edu__item {
+  display: flex;
+  gap: var(--kegel-5);
+  align-items: center;
+  padding-bottom: var(--kegel-8);
+  border-bottom: 0.1rem solid var(--oc-gray-5);
+
+  &__icon {
+    svg {
+      width: var(--kegel-12);
+      height: var(--kegel-12);
+    }
+
+    fill: var(--oc-gray-7);
+
+    &--red {
+      fill: var(--oc-red-6);
+    }
+
+    &--blue {
+      fill: var(--oc-blue-5);
+    }
+
+    &--yellow {
+      fill: var(--oc-yellow-6);
+    }
+  }
+
+  &__link {
+    font-size: var(--kegel-7);
+    text-decoration: none;
+    color: inherit;
+
+    span {
+      text-decoration: underline;
+      color: var(--oc-red-6);
+    }
+  }
+}
+
 .edu__info {
   display: flex;
+  gap: var(--space-4);
   > * {
     width: 100%;
   }
 }
 
-.edu__text {
+.edu__descr {
   font-size: var(--kegel-7);
+  margin-bottom: var(--kegel-12);
 }
 
-.edu__documents {
+.edu__certificate {
   border: 0.3rem solid var(--oc-gray-5);
-  box-shadow: 0 1rem 2rem rgba($color: #000000, $alpha: 0.2);
 
   img {
     width: 100%;
+  }
+
+  box-shadow: 0 1rem 2rem rgba($color: #000000, $alpha: 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 2rem 2rem rgba(var(--oc-red-9-rgb), $alpha: 0.2);
+    transform: translateY(-1rem);
   }
 }

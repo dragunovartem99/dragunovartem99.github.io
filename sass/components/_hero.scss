@@ -6,11 +6,7 @@
   background-position: top;
 
   @include mq("tabPort") {
-    background-image: linear-gradient(
-      to bottom right,
-      var(--oc-gray-8),
-      var(--oc-gray-9)
-    );
+    background-image: linear-gradient(to bottom right, #232323, #232323);
   }
 }
 
@@ -69,6 +65,7 @@
     }
 
     img {
+      box-shadow: 0.7rem 0.7rem 0rem rgba(#e03131, $alpha: 0.5);
       object-fit: cover;
       aspect-ratio: 1 / 1;
       border-radius: 50%;

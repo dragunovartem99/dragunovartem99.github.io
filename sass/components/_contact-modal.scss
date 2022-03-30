@@ -1,0 +1,54 @@
+@use "../abstracts" as *;
+
+.contact-modal {
+  max-width: 80rem;
+  width: 100%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: var(--space-1);
+  border: 0;
+
+  &__content {
+    font-size: var(--kegel-9);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--kegel-9);
+  }
+
+  &__link {
+    color: var(--oc-red-6);
+  }
+
+  &::backdrop {
+    background-color: rgba(#000, 0.5);
+    backdrop-filter: blur(0.5rem);
+  }
+}
+
+.contact-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(-50%, 50%);
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+
+  &:hover {
+    fill: var(--oc-red-6);
+  }
+
+  &:focus {
+    outline: none;
+  }
+  svg {
+    width: var(--kegel-10);
+    height: var(--kegel-10);
+  }
+}

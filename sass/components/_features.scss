@@ -1,6 +1,14 @@
 @use "../abstracts" as *;
 
+.features-w {
+  background-color: #1c1c1c;
+}
+
 .features {
+  .heading {
+    color: #fff;
+  }
+
   padding-block: var(--space-3);
 
   &__grid {
@@ -16,7 +24,7 @@
   &__img {
     min-height: var(--space-10);
     background-size: cover;
-    background-image: url(../img/altumcode-dMUt0X3f59Q-unsplash.jpg);
+    background-image: url(../img/laptop.jpg);
     background-position: right;
   }
 }
@@ -34,15 +42,16 @@
     font-weight: var(--weight-7);
     text-transform: uppercase;
     margin-bottom: var(--kegel-1);
-    color: var(--oc-gray-8);
+    color: #fff;
 
     span {
-      color: var(--oc-red-5);
+      color: var(--oc-red-6);
       margin-right: var(--kegel-1);
     }
   }
 
   &__text {
     font-size: var(--kegel-8);
+    color: var(--oc-gray-1);
   }
 }
