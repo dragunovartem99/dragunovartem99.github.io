@@ -744,7 +744,7 @@ body {
 .contact-modal {
   max-width: 80rem;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
