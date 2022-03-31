@@ -600,14 +600,29 @@ body {
 
 .edu__companies {
   margin-inline: auto;
-  display: flex;
   justify-content: space-around;
+  display: none;
   margin-bottom: var(--space-1);
 }
+@media only screen and (min-width: 37.5em) {
+  .edu__companies {
+    display: flex;
+  }
+}
 .edu__companies img {
-  height: var(--kegel-10);
+  height: var(--kegel-6);
   filter: brightness(0);
   opacity: 0.5;
+}
+@media only screen and (min-width: 37.5em) {
+  .edu__companies img {
+    height: var(--kegel-7);
+  }
+}
+@media only screen and (min-width: 60em) {
+  .edu__companies img {
+    height: var(--kegel-10);
+  }
 }
 
 .edu__title {
@@ -658,9 +673,15 @@ body {
 .edu__info {
   display: flex;
   gap: var(--space-4);
+  flex-direction: column;
 }
 .edu__info > * {
   width: 100%;
+}
+@media only screen and (min-width: 60em) {
+  .edu__info {
+    flex-direction: row;
+  }
 }
 
 .edu__descr {
@@ -670,6 +691,7 @@ body {
 
 .edu__certificate {
   border: 0.3rem solid var(--oc-gray-5);
+  align-self: start;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }

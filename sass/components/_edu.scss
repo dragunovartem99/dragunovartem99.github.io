@@ -6,13 +6,24 @@
 
 .edu__companies {
   margin-inline: auto;
-  display: flex;
   justify-content: space-around;
+  display: none;
+
+  @include mq("tabPort") {
+    display: flex;
+  }
 
   img {
-    height: var(--kegel-10);
+    height: var(--kegel-6);
     filter: brightness(0);
     opacity: 0.5;
+    @include mq("tabPort") {
+      height: var(--kegel-7);
+    }
+
+    @include mq("tabLand") {
+      height: var(--kegel-10);
+    }
   }
 
   margin-bottom: var(--space-1);
@@ -73,8 +84,13 @@
 .edu__info {
   display: flex;
   gap: var(--space-4);
+  flex-direction: column;
   > * {
     width: 100%;
+  }
+
+  @include mq("tabLand") {
+    flex-direction: row;
   }
 }
 
@@ -85,6 +101,7 @@
 
 .edu__certificate {
   border: 0.3rem solid var(--oc-gray-5);
+  align-self: start;
 
   img {
     width: 100%;
