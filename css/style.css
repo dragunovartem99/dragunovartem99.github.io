@@ -668,6 +668,7 @@ body {
 .edu__item__link span {
   text-decoration: underline;
   color: var(--oc-red-6);
+  font-weight: var(--weight-6);
 }
 
 .edu__info {
