@@ -88,7 +88,8 @@ function renderHead(user: User, name: string): string {
 		<meta property="og:image" content="${escape(user.avatar_url)}" />
 		<meta property="og:url" content="${SITE_URL}" />
 		<meta property="og:type" content="profile" />
-		<link rel="icon" href="${escape(user.avatar_url)}" />
+		<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="${escape(user.avatar_url)}" />
 		<link rel="stylesheet" href="./styles.css" />`;
 }
 
