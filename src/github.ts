@@ -49,6 +49,9 @@ async function api<T>(path: string): Promise<T> {
 	return response.json() as Promise<T>;
 }
 
+/** Bytes of code per language, as GitHub's linguist counts them */
+export type LanguageBytes = Record<string, number>;
+
 export function fetchUser(): Promise<User> {
 	return api<User>(`/users/${USERNAME}`);
 }
@@ -62,4 +65,22 @@ export async function fetchRepos(): Promise<Repo[]> {
 		.filter((repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name))
 		.filter((repo) => repo.description !== null && repo.description.trim() !== "")
 		.toSorted((a, b) => b.pushed_at.localeCompare(a.pushed_at));
+}
+
+// One request per repo, summed into a single tally. Bytes are what the API
+// offers — lines of code are not exposed anywhere.
+export async function fetchLanguageBytes(repos: Repo[]): Promise<LanguageBytes> {
+	const tallies = await Promise.all(
+		repos.map((repo) => api<LanguageBytes>(`/repos/${USERNAME}/${repo.name}/languages`))
+	);
+
+	const total: LanguageBytes = {};
+
+	for (const tally of tallies) {
+		for (const [language, bytes] of Object.entries(tally)) {
+			total[language] = (total[language] ?? 0) + bytes;
+		}
+	}
+
+	return total;
 }
