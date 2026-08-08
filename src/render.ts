@@ -1,6 +1,6 @@
-import { SITE_URL, USERNAME } from "./config.ts";
+import { SITE_URL, USERNAME, WEBSITE_URL } from "./config.ts";
 import type { LanguageBytes, Repo, User } from "./github.ts";
-import { clean, escape, href } from "./html.ts";
+import { clean, escape } from "./html.ts";
 import { ICONS } from "./icons.ts";
 import { renderFeatured, renderRepos } from "./sections.ts";
 import { type LanguageSlice, languageBreakdown } from "./stats.ts";
@@ -49,9 +49,7 @@ function renderSidebar(user: User, bytes: LanguageBytes, name: string): string {
 		sidebarItem(ICONS.people, `${followers} · ${following}`),
 	];
 
-	const website = user.blog
-		? `<a class="btn" href="${escape(href(user.blog))}">${ICONS.globe}${escape(clean(user.blog))}</a>`
-		: "";
+	const website = `<a class="btn" href="${WEBSITE_URL}">${ICONS.globe}${escape(clean(WEBSITE_URL))}</a>`;
 
 	return `
 			<aside class="sidebar">

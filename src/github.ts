@@ -3,7 +3,6 @@ import { HIDDEN_REPOS, USERNAME } from "./config.ts";
 export type User = {
 	avatar_url: string;
 	bio: string | null;
-	blog: string | null;
 	company: string | null;
 	followers: number;
 	following: number;
