@@ -1,0 +1,23 @@
+{
+	"name": "dragunovartem99.github.io",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsc -p tsconfig.build.json && node .build/build.js",
+		"format": "oxfmt",
+		"format:check": "oxfmt --check",
+		"lint": "oxlint --fix",
+		"lint:check": "oxlint",
+		"preview": "xdg-open dist/index.html",
+		"types:check": "tsc -p tsconfig.build.json --noEmit"
+	},
+	"devDependencies": {
+		"@dragunovartem99/oxfmt-config": "^2.1.0",
+		"@dragunovartem99/oxlint-config": "^2.0.0",
+		"@types/node": "^24.11.0",
+		"typescript": "~5.9.3"
+	},
+	"engines": {
+		"node": ">=20.19.0"
+	}
+}
