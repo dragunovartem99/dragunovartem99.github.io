@@ -1,6 +1,6 @@
 # dragunovartem99.github.io
 
-Personal landing page that looks like GitHub and builds itself from the GitHub API
+A GitHub-looking front page for my public repos, built from the GitHub API
 
 ## How it works
 
