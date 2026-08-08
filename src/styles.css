@@ -431,12 +431,18 @@ a:hover {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
-	position: relative;
-	z-index: 1;
 }
 
 .card-links:empty {
 	display: none;
+}
+
+/* Only the anchors themselves rise above the stretched overlay, so the gaps
+   around them still belong to the card-wide link */
+.card-link,
+.meta-link {
+	position: relative;
+	z-index: 1;
 }
 
 .card-link {
@@ -448,8 +454,6 @@ a:hover {
 }
 
 .card-meta {
-	position: relative;
-	z-index: 1;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 16px;
