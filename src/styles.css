@@ -224,6 +224,7 @@ a:hover {
 .avatar {
 	width: 100%;
 	height: auto;
+	aspect-ratio: 1 / 1;
 	display: block;
 	border: 1px solid var(--border-muted);
 	border-radius: 50%;
