@@ -574,7 +574,10 @@ a:hover {
 	}
 
 	.avatar-frame {
-		max-width: 96px;
+		/* The column flex sidebar still carries align-items: start from the
+		   two-column layout above, so the frame shrink-to-fits and needs an
+		   explicit width to reserve space before the avatar loads */
+		width: 96px;
 	}
 
 	.fullname {
