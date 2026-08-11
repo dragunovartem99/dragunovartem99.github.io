@@ -1,0 +1,155 @@
+---
+import Octicon from "@/components/Octicon.astro";
+import ProfileSidebar from "@/components/ProfileSidebar.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import RepoCard from "@/components/RepoCard.astro";
+import RepoRow from "@/components/RepoRow.astro";
+import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject, type FeaturedRepo } from "@/featured";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+	fetchLanguageBytes,
+	fetchRepos,
+	fetchUser,
+	languageBreakdown,
+	type Repo,
+} from "@/modules/github";
+
+/** A featured entry paired with whatever the API had to say about it */
+type FeaturedCard =
+	{ kind: "project"; entry: FeaturedProject } | { kind: "repo"; entry: FeaturedRepo; repo: Repo };
+
+// The whole page is one build-time read of the GitHub API — nothing here runs
+// in the browser, and the HTML is as fresh as the last deploy.
+const [user, repos] = await Promise.all([fetchUser(), fetchRepos()]);
+const bytes = await fetchLanguageBytes({ repos });
+
+const now = new Date();
+
+const byName = new Map(repos.map((repo) => [repo.name, repo]));
+
+// A featured repo that is no longer in the API — renamed, made private — drops
+// out rather than rendering an empty card
+const featured = FEATURED.flatMap<FeaturedCard>((entry) => {
+	if (entry.kind === "project") return [{ kind: "project", entry }];
+
+	const repo = byName.get(entry.name);
+
+	return repo ? [{ kind: "repo", entry, repo }] : [];
+});
+
+const rest = repos.filter((repo) => !FEATURED_REPO_NAMES.has(repo.name));
+
+const name = user.name ?? user.login;
+---
+
+<BaseLayout
+	title={`${name} · GitHub`}
+	description={user.bio ?? `Public work of @${user.login}`}
+	user={user}
+	now={now}
+>
+	<ProfileSidebar user={user} slices={languageBreakdown({ bytes })} />
+
+	<div class="content">
+		{
+			featured.length > 0 && (
+				<section id="featured">
+					<h2 class="section-title">
+						<span class="section-icon">
+							<Octicon name="pin" />
+						</span>
+						Featured
+					</h2>
+
+					<ul class="card-grid">
+						{featured.map((card) =>
+							card.kind === "project" ? (
+								<ProjectCard entry={card.entry} />
+							) : (
+								<RepoCard entry={card.entry} repo={card.repo} />
+							),
+						)}
+					</ul>
+				</section>
+			)
+		}
+
+		{
+			rest.length > 0 && (
+				<section id="repositories">
+					<h2 class="section-title">
+						<span class="section-icon">
+							<Octicon name="book" />
+						</span>
+						Other repositories
+						<span class="counter">{rest.length}</span>
+					</h2>
+
+					<ul class="repo-list">
+						{rest.map((repo) => (
+							<RepoRow repo={repo} now={now} />
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		min-width: 0;
+	}
+
+	.section-title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0 0 16px;
+		padding-bottom: 8px;
+		border-bottom: 1px solid var(--border-muted);
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	/* The leading octicon is furniture, so it stays quieter than the heading */
+	.section-icon {
+		display: flex;
+		color: var(--fg-muted);
+	}
+
+	.counter {
+		padding: 0 6px;
+		background-color: var(--canvas-subtle);
+		border: 1px solid var(--border-muted);
+		border-radius: 2em;
+		color: var(--fg-muted);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 18px;
+	}
+
+	.card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.repo-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	@media (max-width: 768px) {
+		.card-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

@@ -23,8 +23,10 @@ const COLORS: Record<string, string> = {
 	"Vue": "#41b883",
 };
 
+/** Linguist's own gray, for anything the map above has not met yet */
 const FALLBACK = "#8b949e";
 
+// The dot next to a language name, in the color GitHub gives it
 export function languageColor(language: string): string {
 	return COLORS[language] ?? FALLBACK;
 }

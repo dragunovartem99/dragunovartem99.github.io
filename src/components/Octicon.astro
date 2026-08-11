@@ -1,0 +1,24 @@
+---
+// Octicons, inlined — a dozen glyphs are fewer bytes than any sprite or
+// icon-font request, and they take their color from `currentColor`.
+import { ICON_PATHS, type IconName } from "./icons.ts";
+
+type Props = {
+	name: IconName;
+	size?: number;
+};
+
+const { name, size = 16 } = Astro.props;
+---
+
+<svg viewBox="0 0 16 16" width={size} height={size} aria-hidden="true">
+	<path d={ICON_PATHS[name]}></path>
+</svg>
+
+<style>
+	svg {
+		fill: currentColor;
+		flex-shrink: 0;
+		vertical-align: text-bottom;
+	}
+</style>

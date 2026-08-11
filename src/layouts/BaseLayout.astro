@@ -1,0 +1,75 @@
+---
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import { SITE_URL } from "@/constants";
+import type { User } from "@/modules/github";
+import "@/styles/global.css";
+
+type Props = {
+	title: string;
+	description: string;
+	user: User;
+	/** The build time, stamped into the footer */
+	now: Date;
+};
+
+const { title, description, user, now } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={SITE_URL} />
+
+		{/* Drawn at build time from the avatar the profile carries. */}
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href={user.avatar_url} />
+
+		<meta property="og:type" content="profile" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={user.avatar_url} />
+		<meta property="og:url" content={SITE_URL} />
+		<meta name="twitter:card" content="summary" />
+	</head>
+
+	<body>
+		<SiteHeader href={user.html_url} login={user.login} />
+
+		<main class="layout">
+			<slot />
+		</main>
+
+		<SiteFooter now={now} />
+	</body>
+</html>
+
+<style>
+	/* The sidebar and the content, side by side until there is no room for two */
+	.layout {
+		display: grid;
+		grid-template-columns: 296px minmax(0, 1fr);
+		gap: 32px;
+		max-width: var(--page-width);
+		margin: 0 auto;
+		padding: 32px;
+	}
+
+	@media (max-width: 1012px) {
+		.layout {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 24px;
+			padding: 24px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.layout {
+			padding: 16px;
+		}
+	}
+</style>

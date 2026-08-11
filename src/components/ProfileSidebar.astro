@@ -1,0 +1,212 @@
+---
+import LanguageBreakdown from "@/components/LanguageBreakdown.astro";
+import Octicon from "@/components/Octicon.astro";
+import { WEBSITE_URL } from "@/constants";
+import type { LanguageSlice, User } from "@/modules/github";
+import { shortUrl } from "@/utils/format";
+
+type Props = {
+	user: User;
+	slices: LanguageSlice[];
+};
+
+const { user, slices } = Astro.props;
+
+const name = user.name ?? user.login;
+---
+
+<aside class="sidebar">
+	<div class="avatar-frame">
+		<img class="avatar" src={user.avatar_url} alt="" width="260" height="260" />
+	</div>
+
+	{/* Everything the avatar sits beside once the page is too narrow for a column */}
+	<div class="body">
+		<h1 class="fullname">{name}</h1>
+		<p class="username">{user.login}</p>
+		{user.bio && <p class="bio">{user.bio}</p>}
+
+		<div class="actions">
+			<a class="btn btn-primary" href={user.html_url}>
+				<Octicon name="mark" />
+				Follow on GitHub
+			</a>
+			<a class="btn" href={WEBSITE_URL}>
+				<Octicon name="globe" />
+				{shortUrl({ url: WEBSITE_URL })}
+			</a>
+		</div>
+
+		<ul class="details">
+			{
+				user.location && (
+					<li class="detail">
+						<Octicon name="location" />
+						<span>{user.location}</span>
+					</li>
+				)
+			}
+			<li class="detail">
+				<Octicon name="people" />
+				<span>
+					<a href={`${user.html_url}?tab=followers`}><strong>{user.followers}</strong> followers</a>
+					· <a href={`${user.html_url}?tab=following`}
+						><strong>{user.following}</strong> following</a
+					>
+				</span>
+			</li>
+		</ul>
+
+		<LanguageBreakdown slices={slices} />
+	</div>
+</aside>
+
+<style>
+	.sidebar {
+		position: sticky;
+		top: calc(var(--header-height) + 32px);
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-self: start;
+	}
+
+	.avatar-frame {
+		max-width: 260px;
+		line-height: 0;
+	}
+
+	.avatar {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		border: 1px solid var(--border-muted);
+		border-radius: 50%;
+	}
+
+	.fullname {
+		margin: 12px 0 0;
+		font-size: 26px;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	.username {
+		margin: 0;
+		color: var(--fg-muted);
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 24px;
+	}
+
+	.bio {
+		margin: 8px 0 0;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.btn {
+		flex: 1 1 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-width: 0;
+		padding: 6px 16px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		background-color: var(--btn-bg);
+		border: 1px solid var(--border-default);
+		border-radius: 6px;
+		color: var(--fg-default);
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	.btn:hover {
+		background-color: var(--btn-hover-bg);
+		text-decoration: none;
+	}
+
+	.btn-primary {
+		background-color: var(--success-emphasis);
+		border-color: #1f883d33;
+		color: #ffffff;
+	}
+
+	.btn-primary:hover {
+		background-color: var(--success-hover);
+	}
+
+	.details {
+		margin: 12px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.detail {
+		display: flex;
+		align-items: baseline;
+		gap: 8px;
+		padding: 4px 0;
+		color: var(--fg-muted);
+	}
+
+	.detail a {
+		color: inherit;
+	}
+
+	.detail strong {
+		color: var(--fg-default);
+		font-weight: 600;
+	}
+
+	/* Once the sidebar stops being a column of its own, the avatar moves beside
+	   the profile instead of on top of it */
+	@media (max-width: 1012px) {
+		.sidebar {
+			position: static;
+			grid-template-columns: 120px minmax(0, 1fr);
+			gap: 20px;
+			align-items: start;
+		}
+
+		.fullname {
+			margin-top: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.sidebar {
+			grid-template-columns: 80px minmax(0, 1fr);
+		}
+	}
+
+	/* Below this the two columns squeeze the name into a sliver, so the avatar
+	   goes back on top — at a fixed width, since its column is now full-width */
+	@media (max-width: 540px) {
+		.sidebar {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 0;
+		}
+
+		.avatar-frame {
+			width: 96px;
+		}
+
+		.fullname {
+			margin-top: 8px;
+			font-size: 22px;
+		}
+
+		.username {
+			font-size: 18px;
+		}
+	}
+</style>

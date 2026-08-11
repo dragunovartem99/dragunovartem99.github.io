@@ -1,15 +1,8 @@
-import type { LanguageBytes } from "./github.ts";
+import type { LanguageBytes, LanguageSlice } from "../types.ts";
 import { languageColor } from "./languages.ts";
 
-export type LanguageSlice = {
-	bytes: number;
-	color: string;
-	language: string;
-	percent: number;
-};
-
 // Every language across the public repos, by share of bytes, biggest first
-export function languageBreakdown(bytes: LanguageBytes): LanguageSlice[] {
+export function languageBreakdown({ bytes }: { bytes: LanguageBytes }): LanguageSlice[] {
 	const ranked = Object.entries(bytes).toSorted(([, a], [, b]) => b - a);
 	const total = ranked.reduce((sum, [, count]) => sum + count, 0);
 

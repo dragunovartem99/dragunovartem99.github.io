@@ -1,0 +1,28 @@
+/* Primer-flavoured colors, straight from GitHub's own light/dark palettes */
+:root {
+	color-scheme: light dark;
+
+	--canvas-default: light-dark(#ffffff, #0d1117);
+	--canvas-subtle: light-dark(#f6f8fa, #151b23);
+	--canvas-inset: light-dark(#f6f8fa, #010409);
+	--fg-default: light-dark(#1f2328, #f0f6fc);
+	--fg-muted: light-dark(#59636e, #9198a1);
+	--border-default: light-dark(#d1d9e0, #3d444d);
+	--border-muted: light-dark(#d1d9e0b3, #3d444db3);
+	--accent-fg: light-dark(#0969da, #4493f8);
+	--accent-emphasis: light-dark(#0969da, #1f6feb);
+	--accent-subtle: light-dark(#ddf4ff, #388bfd1a);
+	--btn-bg: light-dark(#f6f8fa, #212830);
+	--btn-hover-bg: light-dark(#eff2f5, #262c36);
+	--success-emphasis: light-dark(#1f883d, #238636);
+	--success-hover: light-dark(#1a7f37, #29903b);
+	--header-bg: light-dark(#ffffffd9, #0d1117d9);
+	--shadow-card: light-dark(0 1px 3px #1f232814, 0 1px 3px #01040966);
+
+	--header-height: 56px;
+	--page-width: 1280px;
+
+	--font-stack:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji";
+}

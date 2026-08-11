@@ -1,0 +1,23 @@
+---
+import MetaItem from "@/components/MetaItem.astro";
+import Octicon from "@/components/Octicon.astro";
+import type { IconName } from "@/components/icons";
+
+type Props = {
+	icon: IconName;
+	count: number;
+	/** What the number counts — the digits alone say nothing out loud */
+	label: string;
+};
+
+const { icon, count, label } = Astro.props;
+---
+
+{
+	count > 0 && (
+		<MetaItem>
+			<Octicon name={icon} />
+			{count} <span class="sr-only">{label}</span>
+		</MetaItem>
+	)
+}

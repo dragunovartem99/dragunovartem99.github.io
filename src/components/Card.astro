@@ -1,0 +1,106 @@
+---
+import Octicon from "@/components/Octicon.astro";
+import Tag from "@/components/Tag.astro";
+
+type Props = {
+	title: string;
+	/** Where the whole card points */
+	href: string;
+	tag?: string | undefined;
+};
+
+const { title, href, tag } = Astro.props;
+---
+
+<li class="card">
+	<div class="card-top">
+		<Octicon name="repo" />
+		<h3 class="card-title">
+			<a class="stretched" href={href}>{title}</a>
+		</h3>
+		{tag && <Tag>{tag}</Tag>}
+	</div>
+
+	<p class="card-description"><slot /></p>
+
+	{
+		Astro.slots.has("links") && (
+			<div class="card-links">
+				<slot name="links" />
+			</div>
+		)
+	}
+
+	<div class="card-meta">
+		<slot name="meta" />
+	</div>
+</li>
+
+<style>
+	.card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		padding: 16px;
+		background-color: var(--canvas-default);
+		border: 1px solid var(--border-default);
+		border-radius: 8px;
+		box-shadow: var(--shadow-card);
+	}
+
+	/* No transition: the title underlines the instant the card is hovered — the
+	   stretched link covers the whole card — and an eased border arriving after
+	   it reads as two separate reactions to one hover */
+
+	.card:hover {
+		border-color: var(--accent-fg);
+	}
+
+	.card-top {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		/* The leading octicon reads as furniture; the title sets its own color */
+		color: var(--fg-muted);
+	}
+
+	.card-title {
+		flex: 1;
+		min-width: 0;
+		margin: 0;
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	/* The whole card is the link, while the inner links stay clickable on top */
+	.stretched::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: 8px;
+	}
+
+	.card-description {
+		flex-grow: 1;
+		margin: 0;
+		color: var(--fg-muted);
+	}
+
+	.card-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.card-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		color: var(--fg-muted);
+		font-size: 12px;
+	}
+</style>

@@ -1,21 +1,44 @@
 {
 	"name": "dragunovartem99.github.io",
 	"private": true,
+	"description": "A GitHub-looking front page for my public repos, built from the GitHub API",
+	"homepage": "https://dragunovartem99.github.io",
+	"bugs": {
+		"url": "https://github.com/dragunovartem99/dragunovartem99.github.io/issues",
+		"email": "dragunovartem99@gmail.com"
+	},
+	"author": {
+		"name": "Artem Dragunov",
+		"email": "dragunovartem99@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dragunovartem99/dragunovartem99.github.io.git"
+	},
 	"type": "module",
 	"scripts": {
-		"build": "tsc -p tsconfig.build.json && node .build/build.js",
-		"format": "oxfmt",
-		"format:check": "oxfmt --check",
+		"build": "astro build",
+		"dev": "astro dev",
+		"format": "oxfmt --write && prettier --write \"**/*.astro\"",
+		"format:check": "oxfmt --check && prettier --check \"**/*.astro\"",
 		"lint": "oxlint --fix",
 		"lint:check": "oxlint",
-		"preview": "xdg-open dist/index.html",
-		"types:check": "tsc -p tsconfig.build.json --noEmit"
+		"preview": "astro preview",
+		"test": "vitest",
+		"types:check": "astro check"
+	},
+	"dependencies": {
+		"astro": "^7.1.3"
 	},
 	"devDependencies": {
+		"@astrojs/check": "^0.9.9",
 		"@dragunovartem99/oxfmt-config": "^2.1.0",
 		"@dragunovartem99/oxlint-config": "^2.0.0",
 		"@types/node": "^24.11.0",
-		"typescript": "~5.9.3"
+		"prettier": "^3.6.2",
+		"prettier-plugin-astro": "^0.14.1",
+		"typescript": "~5.9.3",
+		"vitest": "^4.1.10"
 	},
 	"engines": {
 		"node": ">=20.19.0"

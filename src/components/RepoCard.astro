@@ -1,0 +1,58 @@
+---
+import Card from "@/components/Card.astro";
+import Counter from "@/components/Counter.astro";
+import LanguageMeta from "@/components/LanguageMeta.astro";
+import MetaItem from "@/components/MetaItem.astro";
+import Octicon from "@/components/Octicon.astro";
+import type { FeaturedRepo } from "@/featured";
+import type { Repo } from "@/modules/github";
+import { absoluteUrl } from "@/utils/format";
+
+type Props = {
+	entry: FeaturedRepo;
+	repo: Repo;
+};
+
+const { entry, repo } = Astro.props;
+
+// A repo that has something to show points at the thing itself and keeps a
+// link to the code — otherwise the card is the repo already
+const site = entry.site ?? repo.homepage;
+---
+
+<Card title={repo.name} href={site ? absoluteUrl(site) : repo.html_url} tag={entry.tag}>
+	{entry.blurb ?? repo.description}
+
+	<Fragment slot="meta">
+		<LanguageMeta language={repo.language} />
+		<Counter icon="repoForked" count={repo.forks_count} label="forks" />
+		{
+			site && (
+				<MetaItem>
+					<a class="source" href={repo.html_url}>
+						<Octicon name="mark" />
+						Source
+					</a>
+				</MetaItem>
+			)
+		}
+	</Fragment>
+</Card>
+
+<style>
+	/* Quiet enough to sit among the counters, until it is pointed at. Only the
+	   anchor itself rises above the card-wide link, so the gaps around it still
+	   belong to the card. */
+	.source {
+		position: relative;
+		z-index: 1;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		color: inherit;
+	}
+
+	.source:hover {
+		color: var(--accent-fg);
+	}
+</style>

@@ -1,0 +1,96 @@
+---
+import Octicon from "@/components/Octicon.astro";
+
+type Props = {
+	/** The profile the mark links to */
+	href: string;
+	login: string;
+};
+
+const { href, login } = Astro.props;
+
+const links = [
+	{ href: "#featured", label: "Featured" },
+	{ href: "#repositories", label: "Repositories" },
+];
+---
+
+<header class="header">
+	<a class="mark" href={href} aria-label="GitHub profile">
+		<Octicon name="mark" size={28} />
+	</a>
+
+	<span class="title">{login}</span>
+
+	<nav class="nav" aria-label="Sections">
+		{
+			links.map((link) => (
+				<a class="nav-link" href={link.href}>
+					{link.label}
+				</a>
+			))
+		}
+	</nav>
+</header>
+
+<style>
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		height: var(--header-height);
+		padding: 0 32px;
+		background-color: var(--header-bg);
+		backdrop-filter: saturate(180%) blur(12px);
+		border-bottom: 1px solid var(--border-default);
+	}
+
+	.mark {
+		display: flex;
+		color: var(--fg-default);
+	}
+
+	.title {
+		font-weight: 600;
+	}
+
+	.nav {
+		display: flex;
+		gap: 4px;
+		margin-left: auto;
+	}
+
+	.nav-link {
+		padding: 6px 12px;
+		border-radius: 6px;
+		color: var(--fg-muted);
+		font-weight: 500;
+	}
+
+	.nav-link:hover {
+		background-color: var(--btn-hover-bg);
+		color: var(--fg-default);
+		text-decoration: none;
+	}
+
+	@media (max-width: 768px) {
+		.header {
+			padding: 0 16px;
+		}
+
+		.nav-link {
+			padding: 6px 8px;
+		}
+	}
+
+	/* Below this the name and the nav fight over the bar; the nav loses, and
+	   both sections are a scroll away regardless */
+	@media (max-width: 540px) {
+		.nav {
+			display: none;
+		}
+	}
+</style>

@@ -1,0 +1,71 @@
+---
+import Counter from "@/components/Counter.astro";
+import LanguageMeta from "@/components/LanguageMeta.astro";
+import MetaItem from "@/components/MetaItem.astro";
+import Octicon from "@/components/Octicon.astro";
+import type { Repo } from "@/modules/github";
+import { relativeTime } from "@/utils/format";
+
+type Props = {
+	repo: Repo;
+	/** The build time — every row is dated against the same instant */
+	now: Date;
+};
+
+const { repo, now } = Astro.props;
+---
+
+<li class="repo">
+	<h3 class="repo-name">
+		<a href={repo.html_url}>{repo.name}</a>
+	</h3>
+
+	<p class="repo-description">{repo.description}</p>
+
+	<div class="repo-meta">
+		<LanguageMeta language={repo.language} />
+		<Counter icon="star" count={repo.stargazers_count} label="stars" />
+		<Counter icon="repoForked" count={repo.forks_count} label="forks" />
+		{
+			repo.license && (
+				<MetaItem>
+					<Octicon name="law" />
+					{repo.license.spdx_id} License
+				</MetaItem>
+			)
+		}
+		<MetaItem>Updated {relativeTime({ iso: repo.pushed_at, now })}</MetaItem>
+	</div>
+</li>
+
+<style>
+	.repo {
+		padding: 16px 0;
+		border-bottom: 1px solid var(--border-muted);
+	}
+
+	.repo:first-child {
+		padding-top: 0;
+	}
+
+	.repo-name {
+		margin: 0;
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	.repo-description {
+		max-width: 75ch;
+		margin: 4px 0 8px;
+		color: var(--fg-muted);
+	}
+
+	.repo-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		color: var(--fg-muted);
+		font-size: 12px;
+	}
+</style>

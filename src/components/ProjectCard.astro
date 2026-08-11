@@ -1,0 +1,50 @@
+---
+import Card from "@/components/Card.astro";
+import LanguageMeta from "@/components/LanguageMeta.astro";
+import MetaItem from "@/components/MetaItem.astro";
+import Octicon from "@/components/Octicon.astro";
+import type { FeaturedProject } from "@/featured";
+import { shortUrl } from "@/utils/format";
+
+type Props = {
+	entry: FeaturedProject;
+};
+
+const { entry } = Astro.props;
+---
+
+<Card title={entry.title} href={entry.url} tag={entry.tag}>
+	{entry.description}
+
+	{
+		entry.links && (
+			<Fragment slot="links">
+				{entry.links.map((link) => (
+					<a class="link" href={link.url}>
+						<Octicon name="link" />
+						{link.label}
+					</a>
+				))}
+			</Fragment>
+		)
+	}
+
+	<Fragment slot="meta">
+		<LanguageMeta language={entry.language ?? null} />
+		<MetaItem>
+			<Octicon name="globe" />
+			{shortUrl({ url: entry.url })}
+		</MetaItem>
+	</Fragment>
+</Card>
+
+<style>
+	/* Above the card-wide link, so these lead where they say they do */
+	.link {
+		position: relative;
+		z-index: 1;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+</style>

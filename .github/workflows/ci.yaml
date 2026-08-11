@@ -8,4 +8,4 @@ jobs:
     pipes:
         uses: dragunovartem99/pipes/.github/workflows/ci.yaml@main
         with:
-            checks: '["format:check", "types:check", "lint:check"]'
+            checks: '["format:check", "types:check", "lint:check", "test"]'

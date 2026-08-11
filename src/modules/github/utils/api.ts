@@ -1,35 +1,12 @@
-import { HIDDEN_REPOS, USERNAME } from "./config.ts";
+import { HIDDEN_REPOS, USERNAME } from "@/constants";
 
-export type User = {
-	avatar_url: string;
-	bio: string | null;
-	company: string | null;
-	followers: number;
-	following: number;
-	html_url: string;
-	location: string | null;
-	login: string;
-	name: string | null;
-};
-
-export type Repo = {
-	archived: boolean;
-	description: string | null;
-	fork: boolean;
-	forks_count: number;
-	homepage: string | null;
-	html_url: string;
-	language: string | null;
-	license: { spdx_id: string } | null;
-	name: string;
-	pushed_at: string;
-	stargazers_count: number;
-	topics: string[];
-};
+import type { LanguageBytes, Repo, User } from "../types.ts";
 
 const API = "https://api.github.com";
 
-async function api<T>(path: string): Promise<T> {
+// Unauthenticated requests are rate-limited per IP, which a CI runner shares
+// with everyone else on it — the workflow passes GITHUB_TOKEN for that reason.
+async function api<T>({ path }: { path: string }): Promise<T> {
 	const token = process.env.GITHUB_TOKEN;
 
 	const response = await fetch(`${API}${path}`, {
@@ -48,17 +25,36 @@ async function api<T>(path: string): Promise<T> {
 	return response.json() as Promise<T>;
 }
 
-/** Bytes of code per language, as GitHub's linguist counts them */
-export type LanguageBytes = Record<string, number>;
+let profile: Promise<User> | undefined;
 
+// The profile behind the sidebar. Both the page and the favicon route want it,
+// and a build is a single process, so the request is made once and shared.
 export function fetchUser(): Promise<User> {
-	return api<User>(`/users/${USERNAME}`);
+	profile ??= api<User>({ path: `/users/${USERNAME}` });
+
+	return profile;
+}
+
+// The avatar bytes, at the size the caller asks for
+export async function fetchAvatar({ user, size }: { user: User; size: number }): Promise<Response> {
+	const url = new URL(user.avatar_url);
+	url.searchParams.set("s", String(size));
+
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error(`GET ${url.pathname} failed: ${response.status} ${response.statusText}`);
+	}
+
+	return response;
 }
 
 // Public, non-fork repos that describe themselves, most recently pushed first —
 // a missing description means the repo is not ready to be shown off
 export async function fetchRepos(): Promise<Repo[]> {
-	const repos = await api<Repo[]>(`/users/${USERNAME}/repos?per_page=100&type=owner&sort=pushed`);
+	const repos = await api<Repo[]>({
+		path: `/users/${USERNAME}/repos?per_page=100&type=owner&sort=pushed`,
+	});
 
 	return repos
 		.filter((repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name))
@@ -68,9 +64,11 @@ export async function fetchRepos(): Promise<Repo[]> {
 
 // One request per repo, summed into a single tally. Bytes are what the API
 // offers — lines of code are not exposed anywhere.
-export async function fetchLanguageBytes(repos: Repo[]): Promise<LanguageBytes> {
+export async function fetchLanguageBytes({ repos }: { repos: Repo[] }): Promise<LanguageBytes> {
 	const tallies = await Promise.all(
-		repos.map((repo) => api<LanguageBytes>(`/repos/${USERNAME}/${repo.name}/languages`))
+		repos.map((repo) =>
+			api<LanguageBytes>({ path: `/repos/${USERNAME}/${repo.name}/languages` })
+		)
 	);
 
 	const total: LanguageBytes = {};
