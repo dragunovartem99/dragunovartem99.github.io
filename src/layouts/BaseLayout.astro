@@ -20,25 +20,62 @@ const { title, description, user, now } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
 		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={SITE_URL} />
+		<meta
+			name="description"
+			content={description}
+		/>
+		<link
+			rel="canonical"
+			href={SITE_URL}
+		/>
 
 		{/* Drawn at build time from the avatar the profile carries. */}
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-		<link rel="apple-touch-icon" href={user.avatar_url} />
+		<link
+			rel="icon"
+			href="/favicon.svg"
+			type="image/svg+xml"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href={user.avatar_url}
+		/>
 
-		<meta property="og:type" content="profile" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={user.avatar_url} />
-		<meta property="og:url" content={SITE_URL} />
-		<meta name="twitter:card" content="summary" />
+		<meta
+			property="og:type"
+			content="profile"
+		/>
+		<meta
+			property="og:title"
+			content={title}
+		/>
+		<meta
+			property="og:description"
+			content={description}
+		/>
+		<meta
+			property="og:image"
+			content={user.avatar_url}
+		/>
+		<meta
+			property="og:url"
+			content={SITE_URL}
+		/>
+		<meta
+			name="twitter:card"
+			content="summary"
+		/>
 	</head>
 
 	<body>
-		<SiteHeader href={user.html_url} login={user.login} />
+		<SiteHeader
+			href={user.html_url}
+			login={user.login}
+		/>
 
 		<main class="layout">
 			<slot />

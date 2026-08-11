@@ -48,7 +48,10 @@ const name = user.name ?? user.login;
 	user={user}
 	now={now}
 >
-	<ProfileSidebar user={user} slices={languageBreakdown({ bytes })} />
+	<ProfileSidebar
+		user={user}
+		slices={languageBreakdown({ bytes })}
+	/>
 
 	<div class="content">
 		{
@@ -66,8 +69,11 @@ const name = user.name ?? user.login;
 							card.kind === "project" ? (
 								<ProjectCard entry={card.entry} />
 							) : (
-								<RepoCard entry={card.entry} repo={card.repo} />
-							),
+								<RepoCard
+									entry={card.entry}
+									repo={card.repo}
+								/>
+							)
 						)}
 					</ul>
 				</section>
@@ -87,7 +93,10 @@ const name = user.name ?? user.login;
 
 					<ul class="repo-list">
 						{rest.map((repo) => (
-							<RepoRow repo={repo} now={now} />
+							<RepoRow
+								repo={repo}
+								now={now}
+							/>
 						))}
 					</ul>
 				</section>

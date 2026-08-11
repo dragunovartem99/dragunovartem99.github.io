@@ -24,8 +24,16 @@ const { repo, now } = Astro.props;
 
 	<div class="repo-meta">
 		<LanguageMeta language={repo.language} />
-		<Counter icon="star" count={repo.stargazers_count} label="stars" />
-		<Counter icon="repoForked" count={repo.forks_count} label="forks" />
+		<Counter
+			icon="star"
+			count={repo.stargazers_count}
+			label="stars"
+		/>
+		<Counter
+			icon="repoForked"
+			count={repo.forks_count}
+			label="forks"
+		/>
 		{
 			repo.license && (
 				<MetaItem>

@@ -20,7 +20,10 @@ const share = (slice: LanguageSlice) => `${slice.percent.toFixed(1)}%`;
 				{slices.map((slice) => (
 					<span
 						class="slice"
-						style={{ width: `${slice.percent.toFixed(2)}%`, backgroundColor: slice.color }}
+						style={{
+							width: `${slice.percent.toFixed(2)}%`,
+							backgroundColor: slice.color,
+						}}
 						title={`${slice.language} ${share(slice)}`}
 					/>
 				))}
@@ -29,7 +32,10 @@ const share = (slice: LanguageSlice) => `${slice.percent.toFixed(1)}%`;
 			<ul class="legend">
 				{slices.map((slice) => (
 					<li class="item">
-						<span class="dot" style={{ backgroundColor: slice.color }} />
+						<span
+							class="dot"
+							style={{ backgroundColor: slice.color }}
+						/>
 						{slice.language} <span class="share">{share(slice)}</span>
 					</li>
 				))}

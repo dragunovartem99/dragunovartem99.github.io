@@ -20,16 +20,27 @@ const { entry, repo } = Astro.props;
 const site = entry.site ?? repo.homepage;
 ---
 
-<Card title={repo.name} href={site ? absoluteUrl(site) : repo.html_url} tag={entry.tag}>
+<Card
+	title={repo.name}
+	href={site ? absoluteUrl(site) : repo.html_url}
+	tag={entry.tag}
+>
 	{entry.blurb ?? repo.description}
 
 	<Fragment slot="meta">
 		<LanguageMeta language={repo.language} />
-		<Counter icon="repoForked" count={repo.forks_count} label="forks" />
+		<Counter
+			icon="repoForked"
+			count={repo.forks_count}
+			label="forks"
+		/>
 		{
 			site && (
 				<MetaItem>
-					<a class="source" href={repo.html_url}>
+					<a
+						class="source"
+						href={repo.html_url}
+					>
 						<Octicon name="mark" />
 						Source
 					</a>

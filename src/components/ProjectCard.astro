@@ -13,14 +13,21 @@ type Props = {
 const { entry } = Astro.props;
 ---
 
-<Card title={entry.title} href={entry.url} tag={entry.tag}>
+<Card
+	title={entry.title}
+	href={entry.url}
+	tag={entry.tag}
+>
 	{entry.description}
 
 	{
 		entry.links && (
 			<Fragment slot="links">
 				{entry.links.map((link) => (
-					<a class="link" href={link.url}>
+					<a
+						class="link"
+						href={link.url}
+					>
 						<Octicon name="link" />
 						{link.label}
 					</a>

@@ -11,7 +11,12 @@ type Props = {
 const { name, size = 16 } = Astro.props;
 ---
 
-<svg viewBox="0 0 16 16" width={size} height={size} aria-hidden="true">
+<svg
+	viewBox="0 0 16 16"
+	width={size}
+	height={size}
+	aria-hidden="true"
+>
 	<path d={ICON_PATHS[name]}></path>
 </svg>
 

@@ -17,7 +17,13 @@ const name = user.name ?? user.login;
 
 <aside class="sidebar">
 	<div class="avatar-frame">
-		<img class="avatar" src={user.avatar_url} alt="" width="260" height="260" />
+		<img
+			class="avatar"
+			src={user.avatar_url}
+			alt=""
+			width="260"
+			height="260"
+		/>
 	</div>
 
 	{/* Everything the avatar sits beside once the page is too narrow for a column */}
@@ -27,11 +33,17 @@ const name = user.name ?? user.login;
 		{user.bio && <p class="bio">{user.bio}</p>}
 
 		<div class="actions">
-			<a class="btn btn-primary" href={user.html_url}>
+			<a
+				class="btn btn-primary"
+				href={user.html_url}
+			>
 				<Octicon name="mark" />
 				Follow on GitHub
 			</a>
-			<a class="btn" href={WEBSITE_URL}>
+			<a
+				class="btn"
+				href={WEBSITE_URL}
+			>
 				<Octicon name="globe" />
 				{shortUrl({ url: WEBSITE_URL })}
 			</a>
@@ -49,7 +61,9 @@ const name = user.name ?? user.login;
 			<li class="detail">
 				<Octicon name="people" />
 				<span>
-					<a href={`${user.html_url}?tab=followers`}><strong>{user.followers}</strong> followers</a>
+					<a href={`${user.html_url}?tab=followers`}
+						><strong>{user.followers}</strong> followers</a
+					>
 					· <a href={`${user.html_url}?tab=following`}
 						><strong>{user.following}</strong> following</a
 					>
