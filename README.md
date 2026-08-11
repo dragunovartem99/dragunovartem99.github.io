@@ -14,7 +14,8 @@ The sidebar bar is every language across those repos by share of bytes — what
 thing the API offers to lines of code.
 
 A repo shows up when it is public, not a fork, not archived, and has a description — everything else
-is considered work in progress.
+is considered work in progress. `HIDDEN_REPOS` in `src/constants.ts` drops the rest by name, the
+profile README and this repo among them.
 
 ## Featured work
 
@@ -40,8 +41,10 @@ described by hand:
 }
 ```
 
-Featured repos are lifted out of the list below, and a repo reference the API does not return — a
-fork, an archive, a rename — is skipped instead of breaking the build.
+A repo entry can also carry `blurb`, when the API description is too dry, and `site`, to point the
+card at a demo instead of the repo. Featured repos are lifted out of the list below, and a repo
+reference the API does not return — a fork, an archive, a rename — is skipped instead of breaking
+the build.
 
 ## Layout
 
@@ -53,6 +56,11 @@ fork, an archive, a rename — is skipped instead of breaking the build.
 | `src/modules/github` | the API calls, the linguist colors and the language tallies |
 | `src/utils`          | date and URL formatting                                     |
 | `src/styles`         | the Primer tokens and the reset; everything else is scoped  |
+| `src/featured.ts`    | the handpicked list on top of the page                      |
+| `src/constants.ts`   | the account, the URLs and the hidden repos                  |
+
+Site content lives in those last two files, never inside a component. Tests sit next to what they
+cover, in `__tests__` beside the `utils/` they exercise.
 
 ## Scripts
 
@@ -63,8 +71,10 @@ fork, an archive, a rename — is skipped instead of breaking the build.
 | `preview`     | serve the built `dist/`               |
 | `test`        | run the unit tests                    |
 | `format`      | format the sources                    |
-| `lint`        | lint the sources                      |
+| `lint`        | lint the sources, fixing what it can  |
 | `types:check` | type-check the sources and templates  |
+
+`format:check` and `lint:check` are the same passes without the writes — what CI runs.
 
 `GITHUB_TOKEN` is optional locally and raises the API rate limit when set.
 
