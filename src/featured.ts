@@ -51,21 +51,16 @@ export const FEATURED: FeaturedEntry[] = [
 		language: "TypeScript",
 	},
 
-	{ kind: "repo", name: "puzzfinder", tag: "Chess" },
+	{ kind: "repo", name: "layr", tag: "Analytics" },
+	{ kind: "repo", name: "tomorrow-night.nvim", tag: "Colorscheme" },
+	{ kind: "repo", name: "puzzfinder-db", tag: "Chess" },
+	{ kind: "repo", name: "chess-animals", tag: "Chess" },
 	{
 		kind: "repo",
 		name: "html-diagram",
 		tag: "Chess",
 		site: "https://dragunovartem99.github.io/html-diagram",
 	},
-	{
-		kind: "repo",
-		name: "vue-pgn-viewer",
-		tag: "Chess",
-		site: "https://dragunovartem99.github.io/vue-pgn-viewer",
-	},
-	{ kind: "repo", name: "layr", tag: "Analytics" },
-	{ kind: "repo", name: "tomorrow-night.nvim", tag: "Colorscheme" },
 ];
 
 export const FEATURED_REPO_NAMES = new Set(
