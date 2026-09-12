@@ -1,6 +1,6 @@
 /**
  * The handpicked work shown on top of the page, in this order — the GitHub
- * pins, with `chessdocs` in the slot the pins spend on this site itself.
+ * pins, with `chessdocs-api` in the slot the pins spend on this site itself.
  *
  * An entry is either a repo reference — the title, description, language and
  * counters are filled in from the GitHub API — or a standalone project that
@@ -45,19 +45,7 @@ export type FeaturedProject = {
 export type FeaturedEntry = FeaturedRepo | FeaturedProject;
 
 export const FEATURED: FeaturedEntry[] = [
-	{
-		kind: "project",
-		title: "chessdocs",
-		description: "A free guide to the rules, strategies, and key principles of the game",
-		url: "https://chessdocs.org/",
-		tag: "Chess",
-		// Linguist has no PGN entry, but the whole site is built from PGN game
-		// data, so that's the language that actually describes it — dotted in
-		// chessdocs' own hero gradient, violet into cyan.
-		language: "PGN",
-		color: "linear-gradient(-45deg, #bd34fe, #47caff)",
-	},
-
+	{ kind: "repo", name: "chessdocs-api", tag: "Chess" },
 	{ kind: "repo", name: "layr", tag: "Analytics" },
 	{ kind: "repo", name: "puzzfinder-db", tag: "Chess" },
 	{
