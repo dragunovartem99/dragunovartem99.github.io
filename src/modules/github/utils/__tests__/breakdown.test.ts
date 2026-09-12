@@ -27,8 +27,8 @@ describe("languageBreakdown", () => {
 		expect(slices[0]?.color).toBe("#41b883");
 	});
 
-	it("falls back to gray for a language the palette has not met", () => {
-		const bytes = { Brainfuck: 700 };
+	it("falls back to gray for a language linguist has no color for", () => {
+		const bytes = { Text: 700 };
 
 		const slices = languageBreakdown({ bytes });
 
