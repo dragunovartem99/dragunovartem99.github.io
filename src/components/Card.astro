@@ -1,4 +1,5 @@
 ---
+import type { IconName } from "@/components/icons";
 import Octicon from "@/components/Octicon.astro";
 import Tag from "@/components/Tag.astro";
 
@@ -7,14 +8,16 @@ type Props = {
 	/** Where the whole card points */
 	href: string;
 	tag?: string | undefined;
+	/** What the card is — a repo unless the thing is not one */
+	icon?: IconName;
 };
 
-const { title, href, tag } = Astro.props;
+const { title, href, tag, icon = "repo" } = Astro.props;
 ---
 
 <li class="card">
 	<div class="card-top">
-		<Octicon name="repo" />
+		<Octicon name={icon} />
 		<h3 class="card-title">
 			<a
 				class="stretched"

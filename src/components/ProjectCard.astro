@@ -16,10 +16,12 @@ const { entry } = Astro.props;
 const language = mapLanguage({ name: entry.language ?? null, color: entry.color });
 ---
 
+{/* A project is a site, not a repo — the code may not even be public */}
 <Card
 	title={entry.title}
 	href={entry.url}
 	tag={entry.tag}
+	icon="globe"
 >
 	{entry.description}
 
