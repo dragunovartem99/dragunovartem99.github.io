@@ -1,0 +1,6 @@
+# What GitHub counts as this repo's language. Linguist goes by bytes, and the
+# TypeScript here is mostly two things that are not what the site is written in:
+# the tests, and the Octicon path data copied from GitHub's own icon set.
+
+**/__tests__/** linguist-vendored
+src/components/icons.ts linguist-vendored
