@@ -1,6 +1,6 @@
 ---
 type Props = {
-	/** Linguist's color for the language, already resolved */
+	/** Linguist's color for the language, already resolved — a solid color or a CSS gradient */
 	color: string;
 };
 
@@ -9,7 +9,7 @@ const { color } = Astro.props;
 
 <span
 	class="dot"
-	style={{ backgroundColor: color }}
+	style={{ background: color }}
 ></span>
 
 <style>

@@ -49,7 +49,9 @@ export const FEATURED: FeaturedEntry[] = [
 		description: "A free guide to the rules, strategies, and key principles of the game",
 		url: "https://chessdocs.org/",
 		tag: "Chess",
-		language: "TypeScript",
+		// Linguist has no PGN entry, but the whole site is built from PGN game
+		// data, so that's the language that actually describes it.
+		language: "PGN",
 	},
 
 	{ kind: "repo", name: "layr", tag: "Analytics" },
