@@ -1,5 +1,6 @@
 /**
- * The handpicked work shown on top of the page, in this order.
+ * The handpicked work shown on top of the page, in this order — the GitHub
+ * pins, with `chessdocs` in the slot the pins spend on this site itself.
  *
  * An entry is either a repo reference — the title, description, language and
  * counters are filled in from the GitHub API — or a standalone project that
@@ -52,15 +53,21 @@ export const FEATURED: FeaturedEntry[] = [
 	},
 
 	{ kind: "repo", name: "layr", tag: "Analytics" },
-	{ kind: "repo", name: "tomorrow-night.nvim", tag: "Colorscheme" },
 	{ kind: "repo", name: "puzzfinder-db", tag: "Chess" },
-	{ kind: "repo", name: "chess-animals", tag: "Chess" },
+	{
+		kind: "repo",
+		name: "vue-pgn-viewer",
+		tag: "Chess",
+		// The repo homepage is the npm page; the demo shows the thing running.
+		site: "https://dragunovartem99.github.io/vue-pgn-viewer/",
+	},
 	{
 		kind: "repo",
 		name: "html-diagram",
 		tag: "Chess",
 		site: "https://dragunovartem99.github.io/html-diagram",
 	},
+	{ kind: "repo", name: "pipes", tag: "Tooling" },
 ];
 
 export const FEATURED_REPO_NAMES = new Set(
