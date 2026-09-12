@@ -4,14 +4,13 @@ import * as linguistLanguages from "linguist-languages";
 const FALLBACK = "#8b949e";
 
 /**
- * Linguist has no PGN entry, so a hand-picked look for the featured entries
- * that claim it anyway — chessdocs' own hero gradient, violet into cyan
+ * Linguist ships one object per language, keyed by the name GitHub reports.
+ * Only two of the fields matter here, and `name` is the one every entry has —
+ * without it this reads as a weak type nothing is assignable to.
  */
-const PGN_GRADIENT = "linear-gradient(-45deg, #bd34fe, #47caff)";
+const LANGUAGES: Record<string, { name: string; color?: string }> = linguistLanguages;
 
-// The dot next to a language name, in the color (or gradient) GitHub gives it
+// The dot next to a language name, in the color GitHub gives it
 export function languageColor(language: string): string {
-	if (language === "PGN") return PGN_GRADIENT;
-	const entry = (linguistLanguages as Record<string, { color?: string }>)[language];
-	return entry?.color ?? FALLBACK;
+	return LANGUAGES[language]?.color ?? FALLBACK;
 }

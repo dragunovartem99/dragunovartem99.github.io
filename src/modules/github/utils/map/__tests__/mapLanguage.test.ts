@@ -14,4 +14,13 @@ describe("mapLanguage", () => {
 	it("says nothing for a repo GitHub could not classify", () => {
 		expect(mapLanguage({ name: null })).toBeNull();
 	});
+
+	it("takes the caller's color for a language linguist has never heard of", () => {
+		const gradient = "linear-gradient(-45deg, #bd34fe, #47caff)";
+
+		expect(mapLanguage({ name: "PGN", color: gradient })).toEqual({
+			color: gradient,
+			name: "PGN",
+		});
+	});
 });

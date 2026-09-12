@@ -13,7 +13,7 @@ type Props = {
 
 const { entry } = Astro.props;
 
-const language = mapLanguage({ name: entry.language ?? null });
+const language = mapLanguage({ name: entry.language ?? null, color: entry.color });
 ---
 
 <Card

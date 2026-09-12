@@ -36,6 +36,8 @@ export type FeaturedProject = {
 	tag?: string;
 	/** Colored dot next to the meta line, same idea as a repo language */
 	language?: string;
+	/** The dot's color, for a language linguist has no entry for */
+	color?: string;
 	/** Extra links under the description */
 	links?: { label: string; url: string }[];
 };
@@ -50,8 +52,10 @@ export const FEATURED: FeaturedEntry[] = [
 		url: "https://chessdocs.org/",
 		tag: "Chess",
 		// Linguist has no PGN entry, but the whole site is built from PGN game
-		// data, so that's the language that actually describes it.
+		// data, so that's the language that actually describes it — dotted in
+		// chessdocs' own hero gradient, violet into cyan.
 		language: "PGN",
+		color: "linear-gradient(-45deg, #bd34fe, #47caff)",
 	},
 
 	{ kind: "repo", name: "layr", tag: "Analytics" },
