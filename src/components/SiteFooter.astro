@@ -12,7 +12,8 @@ const stamp = now.toISOString();
 ---
 
 <footer class="footer">
-	Built from the GitHub API on <time datetime={stamp}>{stamp.slice(0, 10)}</time> ·
+	Built from the GitHub API on <time datetime={stamp}>{stamp.slice(0, 10)}</time>
+	<span class="dot">·</span>
 	<a href={REPO_URL}>source</a>
 </footer>
 
@@ -24,5 +25,11 @@ const stamp = now.toISOString();
 		color: var(--fg-muted);
 		font-size: 12px;
 		text-align: center;
+	}
+
+	/* The separator needs air on both sides — the markup's own newline gives it
+	   none on the right */
+	.dot {
+		margin: 0 2px;
 	}
 </style>
