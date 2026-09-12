@@ -4,42 +4,38 @@ import Counter from "@/components/Counter.astro";
 import LanguageMeta from "@/components/LanguageMeta.astro";
 import MetaItem from "@/components/MetaItem.astro";
 import Octicon from "@/components/Octicon.astro";
-import type { FeaturedRepo } from "@/featured";
-import type { Repo } from "@/modules/github";
-import { absoluteUrl } from "@/utils/format";
+import type { RepoView } from "@/modules/github";
 
 type Props = {
-	entry: FeaturedRepo;
-	repo: Repo;
+	repo: RepoView;
+	tag?: string | undefined;
 };
 
-const { entry, repo } = Astro.props;
-
-// A repo that has something to show points at the thing itself and keeps a
-// link to the code — otherwise the card is the repo already
-const site = entry.site ?? repo.homepage;
+// A repo with something to show points at the thing itself and keeps a link to
+// the code — otherwise the card is the repo already
+const { repo, tag } = Astro.props;
 ---
 
 <Card
 	title={repo.name}
-	href={site ? absoluteUrl(site) : repo.html_url}
-	tag={entry.tag}
+	href={repo.site ?? repo.url}
+	tag={tag}
 >
-	{entry.blurb ?? repo.description}
+	{repo.description}
 
 	<Fragment slot="meta">
 		<LanguageMeta language={repo.language} />
 		<Counter
 			icon="repoForked"
-			count={repo.forks_count}
+			count={repo.forks}
 			label="forks"
 		/>
 		{
-			site && (
+			repo.site && (
 				<MetaItem>
 					<a
 						class="source"
-						href={repo.html_url}
+						href={repo.url}
 					>
 						<Octicon name="mark" />
 						Source

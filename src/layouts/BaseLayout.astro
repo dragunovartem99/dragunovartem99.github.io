@@ -2,18 +2,18 @@
 import SiteFooter from "@/components/SiteFooter.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
 import { SITE_URL } from "@/constants";
-import type { User } from "@/modules/github";
+import type { ProfileView } from "@/modules/github";
 import "@/styles/global.css";
 
 type Props = {
 	title: string;
 	description: string;
-	user: User;
+	profile: ProfileView;
 	/** The build time, stamped into the footer */
 	now: Date;
 };
 
-const { title, description, user, now } = Astro.props;
+const { title, description, profile, now } = Astro.props;
 ---
 
 <!doctype html>
@@ -42,7 +42,7 @@ const { title, description, user, now } = Astro.props;
 		/>
 		<link
 			rel="apple-touch-icon"
-			href={user.avatar_url}
+			href={profile.avatarUrl}
 		/>
 
 		<meta
@@ -59,7 +59,7 @@ const { title, description, user, now } = Astro.props;
 		/>
 		<meta
 			property="og:image"
-			content={user.avatar_url}
+			content={profile.avatarUrl}
 		/>
 		<meta
 			property="og:url"
@@ -73,8 +73,8 @@ const { title, description, user, now } = Astro.props;
 
 	<body>
 		<SiteHeader
-			href={user.html_url}
-			login={user.login}
+			href={profile.url}
+			login={profile.login}
 		/>
 
 		<main class="layout">

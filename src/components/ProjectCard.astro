@@ -4,6 +4,7 @@ import LanguageMeta from "@/components/LanguageMeta.astro";
 import MetaItem from "@/components/MetaItem.astro";
 import Octicon from "@/components/Octicon.astro";
 import type { FeaturedProject } from "@/featured";
+import { mapLanguage } from "@/modules/github";
 import { shortUrl } from "@/utils/format";
 
 type Props = {
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const { entry } = Astro.props;
+
+const language = mapLanguage({ name: entry.language ?? null });
 ---
 
 <Card
@@ -37,7 +40,7 @@ const { entry } = Astro.props;
 	}
 
 	<Fragment slot="meta">
-		<LanguageMeta language={entry.language ?? null} />
+		<LanguageMeta language={language} />
 		<MetaItem>
 			<Octicon name="globe" />
 			{shortUrl({ url: entry.url })}

@@ -1,11 +1,11 @@
 ---
 import LanguageDot from "@/components/LanguageDot.astro";
 import MetaItem from "@/components/MetaItem.astro";
-import { languageColor } from "@/modules/github";
+import type { Language } from "@/modules/github";
 
 type Props = {
 	/** Null for a repo GitHub could not classify — the meta item is dropped */
-	language: string | null;
+	language: Language | null;
 };
 
 const { language } = Astro.props;
@@ -14,8 +14,8 @@ const { language } = Astro.props;
 {
 	language && (
 		<MetaItem>
-			<LanguageDot color={languageColor(language)} />
-			{language}
+			<LanguageDot color={language.color} />
+			{language.name}
 		</MetaItem>
 	)
 }

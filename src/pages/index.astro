@@ -5,7 +5,7 @@ import ProjectCard from "@/components/ProjectCard.astro";
 import RepoCard from "@/components/RepoCard.astro";
 import RepoRow from "@/components/RepoRow.astro";
 import { HIDDEN_REPOS, USERNAME } from "@/constants";
-import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject, type FeaturedRepo } from "@/featured";
+import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject } from "@/featured";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
 	fetchLanguageBytes,
@@ -13,12 +13,16 @@ import {
 	fetchUser,
 	isShowable,
 	languageBreakdown,
-	type Repo,
+	mapProfile,
+	mapRepo,
+	type RepoView,
 } from "@/modules/github";
+import { absoluteUrl } from "@/utils/format";
 
-/** A featured entry paired with whatever the API had to say about it */
+/** A featured entry, ready to render */
 type FeaturedCard =
-	{ kind: "project"; entry: FeaturedProject } | { kind: "repo"; entry: FeaturedRepo; repo: Repo };
+	| { kind: "project"; entry: FeaturedProject }
+	| { kind: "repo"; repo: RepoView; tag: string | undefined };
 
 // The whole page is one build-time read of the GitHub API — nothing here runs
 // in the browser, and the HTML is as fresh as the last deploy.
@@ -34,6 +38,8 @@ const bytes = await fetchLanguageBytes({ username: USERNAME, repos });
 
 const now = new Date();
 
+const profile = mapProfile({ user });
+
 const byName = new Map(repos.map((repo) => [repo.name, repo]));
 
 // A featured repo that is no longer in the API — renamed, made private — drops
@@ -43,22 +49,39 @@ const featured = FEATURED.flatMap<FeaturedCard>((entry) => {
 
 	const repo = byName.get(entry.name);
 
-	return repo ? [{ kind: "repo", entry, repo }] : [];
+	if (!repo) return [];
+
+	const view = mapRepo({ repo, now });
+
+	// What `featured.ts` says wins over what the API says: a blurb when the
+	// API's own is too dry, a demo when the repo homepage is not the thing
+	// worth seeing first
+	return [
+		{
+			kind: "repo",
+			tag: entry.tag,
+			repo: {
+				...view,
+				description: entry.blurb ?? view.description,
+				site: entry.site ? absoluteUrl(entry.site) : view.site,
+			},
+		},
+	];
 });
 
-const rest = repos.filter((repo) => !FEATURED_REPO_NAMES.has(repo.name));
-
-const name = user.name ?? user.login;
+const rest = repos
+	.filter((repo) => !FEATURED_REPO_NAMES.has(repo.name))
+	.map((repo) => mapRepo({ repo, now }));
 ---
 
 <BaseLayout
-	title={`${name} · GitHub`}
-	description={user.bio ?? `Public work of @${user.login}`}
-	user={user}
+	title={`${profile.name} · GitHub`}
+	description={profile.bio ?? `Public work of @${profile.login}`}
+	profile={profile}
 	now={now}
 >
 	<ProfileSidebar
-		user={user}
+		profile={profile}
 		slices={languageBreakdown({ bytes })}
 	/>
 
@@ -79,8 +102,8 @@ const name = user.name ?? user.login;
 								<ProjectCard entry={card.entry} />
 							) : (
 								<RepoCard
-									entry={card.entry}
 									repo={card.repo}
+									tag={card.tag}
 								/>
 							)
 						)}
@@ -102,10 +125,7 @@ const name = user.name ?? user.login;
 
 					<ul class="repo-list">
 						{rest.map((repo) => (
-							<RepoRow
-								repo={repo}
-								now={now}
-							/>
+							<RepoRow repo={repo} />
 						))}
 					</ul>
 				</section>

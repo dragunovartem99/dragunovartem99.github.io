@@ -3,21 +3,18 @@ import Counter from "@/components/Counter.astro";
 import LanguageMeta from "@/components/LanguageMeta.astro";
 import MetaItem from "@/components/MetaItem.astro";
 import Octicon from "@/components/Octicon.astro";
-import type { Repo } from "@/modules/github";
-import { relativeTime } from "@/utils/format";
+import type { RepoView } from "@/modules/github";
 
 type Props = {
-	repo: Repo;
-	/** The build time — every row is dated against the same instant */
-	now: Date;
+	repo: RepoView;
 };
 
-const { repo, now } = Astro.props;
+const { repo } = Astro.props;
 ---
 
 <li class="repo">
 	<h3 class="repo-name">
-		<a href={repo.html_url}>{repo.name}</a>
+		<a href={repo.url}>{repo.name}</a>
 	</h3>
 
 	<p class="repo-description">{repo.description}</p>
@@ -26,23 +23,23 @@ const { repo, now } = Astro.props;
 		<LanguageMeta language={repo.language} />
 		<Counter
 			icon="star"
-			count={repo.stargazers_count}
+			count={repo.stars}
 			label="stars"
 		/>
 		<Counter
 			icon="repoForked"
-			count={repo.forks_count}
+			count={repo.forks}
 			label="forks"
 		/>
 		{
 			repo.license && (
 				<MetaItem>
 					<Octicon name="law" />
-					{repo.license.spdx_id} License
+					{repo.license}
 				</MetaItem>
 			)
 		}
-		<MetaItem>Updated {relativeTime({ iso: repo.pushed_at, now })}</MetaItem>
+		<MetaItem>Updated {repo.updated}</MetaItem>
 	</div>
 </li>
 

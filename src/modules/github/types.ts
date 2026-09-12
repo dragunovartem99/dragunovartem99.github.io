@@ -1,4 +1,9 @@
-/** The slices of GitHub's REST payloads this page actually reads */
+/**
+ * Two sets of types. The first is the slices of GitHub's REST payloads this
+ * page actually reads — snake_case, shaped by the API. The second is what a
+ * component prints, mapped from the first in `utils/map/`, so a rename on
+ * GitHub's side stops at the mapper instead of reaching the markup.
+ */
 
 export type User = {
 	avatar_url: string;
@@ -36,4 +41,40 @@ export type LanguageSlice = {
 	color: string;
 	language: string;
 	percent: number;
+};
+
+/** A language and the dot that goes beside it */
+export type Language = {
+	color: string;
+	name: string;
+};
+
+/** A repo as a card or a row prints it */
+export type RepoView = {
+	description: string;
+	forks: number;
+	language: Language | null;
+	/** Spelled out, e.g. "MIT License" */
+	license: string | null;
+	name: string;
+	/** The repo's own homepage, made absolute — null when it has none */
+	site: string | null;
+	stars: number;
+	/** Relative to the build, e.g. "3 days ago" */
+	updated: string;
+	/** The repo on GitHub */
+	url: string;
+};
+
+/** The profile as the sidebar and the head print it */
+export type ProfileView = {
+	avatarUrl: string;
+	bio: string | null;
+	followers: number;
+	following: number;
+	location: string | null;
+	login: string;
+	/** The display name, falling back to the login when the profile has none */
+	name: string;
+	url: string;
 };

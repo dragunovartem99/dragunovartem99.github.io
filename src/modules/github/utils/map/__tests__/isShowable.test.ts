@@ -1,27 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { Repo } from "../../../types.ts";
 import { isShowable } from "../isShowable.ts";
-
-// Only the fields the predicate reads matter; the rest is filled in so the
-// fixture is a real Repo
-function repo(overrides: Partial<Repo> = {}): Repo {
-	return {
-		archived: false,
-		description: "A thing that does a thing",
-		fork: false,
-		forks_count: 0,
-		homepage: null,
-		html_url: "https://github.com/dragunovartem99/layr",
-		language: "TypeScript",
-		license: null,
-		name: "layr",
-		pushed_at: "2026-01-09T12:00:00Z",
-		stargazers_count: 0,
-		topics: [],
-		...overrides,
-	};
-}
+import { repo } from "./fixtures.ts";
 
 const hidden = new Set(["dragunovartem99"]);
 

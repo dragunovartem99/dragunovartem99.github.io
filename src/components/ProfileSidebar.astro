@@ -2,24 +2,22 @@
 import LanguageBreakdown from "@/components/LanguageBreakdown.astro";
 import Octicon from "@/components/Octicon.astro";
 import { WEBSITE_URL } from "@/constants";
-import type { LanguageSlice, User } from "@/modules/github";
+import type { LanguageSlice, ProfileView } from "@/modules/github";
 import { shortUrl } from "@/utils/format";
 
 type Props = {
-	user: User;
+	profile: ProfileView;
 	slices: LanguageSlice[];
 };
 
-const { user, slices } = Astro.props;
-
-const name = user.name ?? user.login;
+const { profile, slices } = Astro.props;
 ---
 
 <aside class="sidebar">
 	<div class="avatar-frame">
 		<img
 			class="avatar"
-			src={user.avatar_url}
+			src={profile.avatarUrl}
 			alt=""
 			width="260"
 			height="260"
@@ -28,14 +26,14 @@ const name = user.name ?? user.login;
 
 	{/* Everything the avatar sits beside once the page is too narrow for a column */}
 	<div class="body">
-		<h1 class="fullname">{name}</h1>
-		<p class="username">{user.login}</p>
-		{user.bio && <p class="bio">{user.bio}</p>}
+		<h1 class="fullname">{profile.name}</h1>
+		<p class="username">{profile.login}</p>
+		{profile.bio && <p class="bio">{profile.bio}</p>}
 
 		<div class="actions">
 			<a
 				class="btn btn-primary"
-				href={user.html_url}
+				href={profile.url}
 			>
 				<Octicon name="mark" />
 				Follow on GitHub
@@ -51,21 +49,21 @@ const name = user.name ?? user.login;
 
 		<ul class="details">
 			{
-				user.location && (
+				profile.location && (
 					<li class="detail">
 						<Octicon name="location" />
-						<span>{user.location}</span>
+						<span>{profile.location}</span>
 					</li>
 				)
 			}
 			<li class="detail">
 				<Octicon name="people" />
 				<span>
-					<a href={`${user.html_url}?tab=followers`}
-						><strong>{user.followers}</strong> followers</a
+					<a href={`${profile.url}?tab=followers`}
+						><strong>{profile.followers}</strong> followers</a
 					>
-					· <a href={`${user.html_url}?tab=following`}
-						><strong>{user.following}</strong> following</a
+					· <a href={`${profile.url}?tab=following`}
+						><strong>{profile.following}</strong> following</a
 					>
 				</span>
 			</li>
