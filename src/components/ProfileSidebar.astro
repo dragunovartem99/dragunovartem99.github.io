@@ -51,24 +51,17 @@ const { profile, slices } = Astro.props;
 			{
 				profile.location && (
 					<li class="detail">
-						<span class="detail-icon">
-							<Octicon name="location" />
-						</span>
-						<span>{profile.location}</span>
+						<Octicon name="location" /> {profile.location}
 					</li>
 				)
 			}
+			{/* The icon belongs to the followers link, the way GitHub's own does */}
 			<li class="detail">
-				<span class="detail-icon">
-					<Octicon name="people" />
-				</span>
-				<span>
-					<a href={`${profile.url}?tab=followers`}
-						><strong>{profile.followers}</strong> followers</a
-					>{" · "}<a href={`${profile.url}?tab=following`}
-						><strong>{profile.following}</strong> following</a
-					>
-				</span>
+				<a href={`${profile.url}?tab=followers`}
+					><Octicon name="people" /> <strong>{profile.followers}</strong> followers</a
+				>{" · "}<a href={`${profile.url}?tab=following`}
+					><strong>{profile.following}</strong> following</a
+				>
 			</li>
 		</ul>
 
@@ -165,26 +158,18 @@ const { profile, slices } = Astro.props;
 		list-style: none;
 	}
 
+	/* Plain inline flow, so the octicon lands on the text bottom the way it is
+	   built to. A flex row here would make the icon a flex item, where
+	   `vertical-align` does nothing and an svg has no baseline of its own to
+	   align by — which leaves it hanging above the words. */
 	.detail {
-		display: flex;
-		align-items: flex-start;
-		gap: 8px;
 		padding: 4px 0;
 		color: var(--fg-muted);
 	}
 
-	/* An svg has no baseline of its own, so a flex row hangs it off its bottom
-	   edge and the icon floats above the words. The wrapper is one line tall
-	   and centers the icon inside that, which still holds when the text beside
-	   it wraps onto a second line. */
-	.detail-icon {
-		display: flex;
-		align-items: center;
-		height: 1lh;
-	}
-
 	.detail a {
 		color: inherit;
+		white-space: nowrap;
 	}
 
 	.detail strong {
