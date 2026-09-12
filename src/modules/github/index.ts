@@ -3,4 +3,5 @@
 export { fetchAvatar, fetchLanguageBytes, fetchRepos, fetchUser } from "./utils/api.ts";
 export { languageBreakdown } from "./utils/breakdown.ts";
 export { languageColor } from "./utils/languages.ts";
+export { isShowable } from "./utils/map/isShowable.ts";
 export type { LanguageBytes, LanguageSlice, Repo, User } from "./types.ts";

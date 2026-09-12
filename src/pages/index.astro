@@ -4,12 +4,14 @@ import ProfileSidebar from "@/components/ProfileSidebar.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import RepoCard from "@/components/RepoCard.astro";
 import RepoRow from "@/components/RepoRow.astro";
+import { HIDDEN_REPOS, USERNAME } from "@/constants";
 import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject, type FeaturedRepo } from "@/featured";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
 	fetchLanguageBytes,
 	fetchRepos,
 	fetchUser,
+	isShowable,
 	languageBreakdown,
 	type Repo,
 } from "@/modules/github";
@@ -20,8 +22,15 @@ type FeaturedCard =
 
 // The whole page is one build-time read of the GitHub API — nothing here runs
 // in the browser, and the HTML is as fresh as the last deploy.
-const [user, repos] = await Promise.all([fetchUser(), fetchRepos()]);
-const bytes = await fetchLanguageBytes({ repos });
+const [user, owned] = await Promise.all([
+	fetchUser({ username: USERNAME }),
+	fetchRepos({ username: USERNAME }),
+]);
+
+// What the API returns is every repo; what this page prints is the page's call
+const repos = owned.filter((repo) => isShowable({ repo, hidden: HIDDEN_REPOS }));
+
+const bytes = await fetchLanguageBytes({ username: USERNAME, repos });
 
 const now = new Date();
 

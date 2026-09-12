@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 
+import { USERNAME } from "@/constants";
 import { fetchAvatar, fetchUser } from "@/modules/github";
 
 const SIZE = 180;
@@ -7,7 +8,7 @@ const SIZE = 180;
 // The avatar is square; a favicon of a person should not be. The image is
 // inlined because a favicon SVG may not reach out to another origin.
 export const GET: APIRoute = async () => {
-	const user = await fetchUser();
+	const user = await fetchUser({ username: USERNAME });
 	const response = await fetchAvatar({ user, size: SIZE });
 
 	const type = response.headers.get("content-type") ?? "image/png";
