@@ -15,7 +15,8 @@ thing the API offers to lines of code.
 
 A repo shows up when it is public, not a fork, not archived, and has a description — everything else
 is considered work in progress. `HIDDEN_REPOS` in `src/constants.ts` drops the rest by name, the
-profile README and this repo among them.
+profile README among them. This repo is not on that list: the page lists itself, like everything
+else it found.
 
 ## Featured work
 

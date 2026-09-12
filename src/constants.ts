@@ -10,8 +10,6 @@ export const WEBSITE_URL = "https://dragunov.dev";
 
 /** Repos listed here are never shown, whatever the API says */
 export const HIDDEN_REPOS = new Set([
-	// The profile README
+	// The profile README, which is prose rather than a project
 	USERNAME,
-	// This page listing itself
-	`${USERNAME}.github.io`,
 ]);
