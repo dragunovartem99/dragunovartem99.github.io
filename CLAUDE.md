@@ -8,6 +8,7 @@
 - DO NOT use non-null assertions (`!`) — narrow the type instead
 - DO use `//` comments on functions that take parameters or return a value — `oxlint`'s jsdoc rules demand `@param`/`@returns` from every `/** */` block, and those tags restate the signature
 - DO reserve `/** */` for types, consts, parameterless functions, and the file-level blurb — put that blurb above the imports, or it attaches to the first declaration below it
+- DO write the extension on every import that names a file — `@/constants.ts`, `../types.ts`, `./Card.astro`. Only `@/modules/github` goes bare, because it names the directory and its barrel
 
 ## Structure
 

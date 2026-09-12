@@ -3,9 +3,9 @@ import Card from "@/components/Card.astro";
 import LanguageMeta from "@/components/LanguageMeta.astro";
 import MetaItem from "@/components/MetaItem.astro";
 import Octicon from "@/components/Octicon.astro";
-import type { FeaturedProject } from "@/featured";
+import type { FeaturedProject } from "@/featured.ts";
 import { mapLanguage } from "@/modules/github";
-import { shortUrl } from "@/utils/url";
+import { shortUrl } from "@/utils/url.ts";
 
 type Props = {
 	entry: FeaturedProject;

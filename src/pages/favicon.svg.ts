@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-import { USERNAME } from "@/constants";
+import { USERNAME } from "@/constants.ts";
 import { fetchAvatar, fetchUser } from "@/modules/github";
 
 const SIZE = 180;

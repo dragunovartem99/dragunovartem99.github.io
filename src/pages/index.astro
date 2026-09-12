@@ -4,8 +4,8 @@ import ProfileSidebar from "@/components/ProfileSidebar.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import RepoCard from "@/components/RepoCard.astro";
 import RepoRow from "@/components/RepoRow.astro";
-import { HIDDEN_REPOS, USERNAME } from "@/constants";
-import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject } from "@/featured";
+import { HIDDEN_REPOS, USERNAME } from "@/constants.ts";
+import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject } from "@/featured.ts";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
 	fetchLanguageBytes,
@@ -17,7 +17,7 @@ import {
 	mapRepo,
 	type RepoView,
 } from "@/modules/github";
-import { absoluteUrl } from "@/utils/url";
+import { absoluteUrl } from "@/utils/url.ts";
 
 /** A featured entry, ready to render */
 type FeaturedCard =

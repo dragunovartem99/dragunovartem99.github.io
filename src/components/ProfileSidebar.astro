@@ -1,9 +1,9 @@
 ---
 import LanguageBreakdown from "@/components/LanguageBreakdown.astro";
 import Octicon from "@/components/Octicon.astro";
-import { WEBSITE_URL } from "@/constants";
+import { WEBSITE_URL } from "@/constants.ts";
 import type { LanguageSlice, ProfileView } from "@/modules/github";
-import { shortUrl } from "@/utils/url";
+import { shortUrl } from "@/utils/url.ts";
 
 type Props = {
 	profile: ProfileView;

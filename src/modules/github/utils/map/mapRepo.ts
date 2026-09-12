@@ -1,5 +1,5 @@
-import { relativeTime } from "@/utils/time";
-import { absoluteUrl } from "@/utils/url";
+import { relativeTime } from "@/utils/time.ts";
+import { absoluteUrl } from "@/utils/url.ts";
 
 import type { Repo, RepoView } from "../../types.ts";
 import { mapLanguage } from "./mapLanguage.ts";
