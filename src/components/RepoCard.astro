@@ -24,6 +24,11 @@ const { repo } = Astro.props;
 	<Fragment slot="meta">
 		<LanguageMeta language={repo.language} />
 		<Counter
+			icon="star"
+			count={repo.stars}
+			label="stars"
+		/>
+		<Counter
 			icon="repoForked"
 			count={repo.forks}
 			label="forks"
