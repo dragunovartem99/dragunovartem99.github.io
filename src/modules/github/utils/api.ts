@@ -1,4 +1,4 @@
-import type { LanguageBytes, Repo, User } from "../types.ts";
+import type { LanguageBytes, Pinned, Repo, User } from "../types.ts";
 
 const API = "https://api.github.com";
 
@@ -24,6 +24,51 @@ async function api<T>({ path }: { path: string }): Promise<T> {
 	}
 
 	return response.json() as Promise<T>;
+}
+
+// GraphQL is the only door to the profile pins, and it takes no anonymous
+// callers — so unlike the REST calls above, this one needs GITHUB_TOKEN.
+// GitHub answers a failed query with a 200 and an `errors` list, which counts
+// as a failed request all the same.
+async function graphql<T>({
+	query,
+	variables,
+}: {
+	query: string;
+	variables: Record<string, unknown>;
+}): Promise<T> {
+	const token = process.env.GITHUB_TOKEN;
+
+	if (!token) {
+		throw new Error("GITHUB_TOKEN is required: the GraphQL API takes no anonymous requests");
+	}
+
+	const response = await fetch(`${API}/graphql`, {
+		method: "POST",
+		headers: {
+			"Authorization": `Bearer ${token}`,
+			"Content-Type": "application/json",
+			"User-Agent": USER_AGENT,
+		},
+		body: JSON.stringify({ query, variables }),
+	});
+
+	if (!response.ok) {
+		throw new Error(`POST /graphql failed: ${response.status} ${response.statusText}`);
+	}
+
+	const { data, errors } = (await response.json()) as {
+		data: T | null;
+		errors?: { message: string }[];
+	};
+
+	if (errors?.length || !data) {
+		throw new Error(
+			`POST /graphql failed: ${errors?.map((error) => error.message).join("; ")}`
+		);
+	}
+
+	return data;
 }
 
 const profiles = new Map<string, Promise<User>>();
@@ -87,4 +132,29 @@ export async function fetchLanguageBytes({
 	}
 
 	return total;
+}
+
+const PINNED_QUERY = `
+	query ($login: String!) {
+		user(login: $login) {
+			pinnedItems(first: 6, types: REPOSITORY) {
+				nodes {
+					... on Repository {
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
+// The repo names pinned on the profile, in the order the profile shows them.
+// Only the names: the rest of each repo is already in `fetchRepos`.
+export async function fetchPinned({ username }: { username: string }): Promise<string[]> {
+	const { user } = await graphql<Pinned>({
+		query: PINNED_QUERY,
+		variables: { login: username },
+	});
+
+	return user.pinnedItems.nodes.map((node) => node.name);
 }

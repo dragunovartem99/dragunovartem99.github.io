@@ -1,5 +1,5 @@
 /**
- * Two sets of types. The first is the slices of GitHub's REST payloads this
+ * Two sets of types. The first is the slices of GitHub's payloads this
  * page actually reads — snake_case, shaped by the API. The second is what a
  * component prints, mapped from the first in `utils/map/`, so a rename on
  * GitHub's side stops at the mapper instead of reaching the markup.
@@ -30,6 +30,15 @@ export type Repo = {
 	pushed_at: string;
 	stargazers_count: number;
 	topics: string[];
+};
+
+/** The profile pins, as the GraphQL query in `fetchPinned` asks for them */
+export type Pinned = {
+	user: {
+		pinnedItems: {
+			nodes: { name: string }[];
+		};
+	};
 };
 
 /** Bytes of code per language, as GitHub's linguist counts them */

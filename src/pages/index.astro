@@ -1,34 +1,27 @@
 ---
 import Octicon from "@/components/Octicon.astro";
 import ProfileSidebar from "@/components/ProfileSidebar.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
 import RepoCard from "@/components/RepoCard.astro";
 import RepoRow from "@/components/RepoRow.astro";
 import { HIDDEN_REPOS, USERNAME } from "@/constants.ts";
-import { FEATURED, FEATURED_REPO_NAMES, type FeaturedProject } from "@/featured.ts";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
 	fetchLanguageBytes,
+	fetchPinned,
 	fetchRepos,
 	fetchUser,
 	isShowable,
 	languageBreakdown,
 	mapProfile,
 	mapRepo,
-	type RepoView,
 } from "@/modules/github";
-import { absoluteUrl } from "@/utils/url.ts";
-
-/** A featured entry, ready to render */
-type FeaturedCard =
-	| { kind: "project"; entry: FeaturedProject }
-	| { kind: "repo"; repo: RepoView; tag: string | undefined };
 
 // The whole page is one build-time read of the GitHub API — nothing here runs
 // in the browser, and the HTML is as fresh as the last deploy.
-const [user, owned] = await Promise.all([
+const [user, owned, pinned] = await Promise.all([
 	fetchUser({ username: USERNAME }),
 	fetchRepos({ username: USERNAME }),
+	fetchPinned({ username: USERNAME }),
 ]);
 
 // What the API returns is every repo; what this page prints is the page's call
@@ -42,35 +35,19 @@ const profile = mapProfile({ user });
 
 const byName = new Map(repos.map((repo) => [repo.name, repo]));
 
-// A featured repo that is no longer in the API — renamed, made private — drops
-// out rather than rendering an empty card
-const featured = FEATURED.flatMap<FeaturedCard>((entry) => {
-	if (entry.kind === "project") return [{ kind: "project", entry }];
+// The featured cards are the profile pins, in the profile's order. A pin the
+// page would not show anyway — hidden, archived, undescribed — drops out
+// rather than rendering an empty card.
+const featured = pinned.flatMap((name) => {
+	const repo = byName.get(name);
 
-	const repo = byName.get(entry.name);
-
-	if (!repo) return [];
-
-	const view = mapRepo({ repo, now });
-
-	// What `featured.ts` says wins over what the API says: a blurb when the
-	// API's own is too dry, a demo when the repo homepage is not the thing
-	// worth seeing first
-	return [
-		{
-			kind: "repo",
-			tag: entry.tag,
-			repo: {
-				...view,
-				description: entry.blurb ?? view.description,
-				site: entry.site ? absoluteUrl(entry.site) : view.site,
-			},
-		},
-	];
+	return repo ? [mapRepo({ repo, now })] : [];
 });
 
+const featuredNames = new Set(featured.map((repo) => repo.name));
+
 const rest = repos
-	.filter((repo) => !FEATURED_REPO_NAMES.has(repo.name))
+	.filter((repo) => !featuredNames.has(repo.name))
 	.map((repo) => mapRepo({ repo, now }));
 ---
 
@@ -97,16 +74,9 @@ const rest = repos
 					</h2>
 
 					<ul class="card-grid">
-						{featured.map((card) =>
-							card.kind === "project" ? (
-								<ProjectCard entry={card.entry} />
-							) : (
-								<RepoCard
-									repo={card.repo}
-									tag={card.tag}
-								/>
-							)
-						)}
+						{featured.map((repo) => (
+							<RepoCard repo={repo} />
+						))}
 					</ul>
 				</section>
 			)

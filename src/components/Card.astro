@@ -1,23 +1,18 @@
 ---
-import type { IconName } from "@/components/icons.ts";
 import Octicon from "@/components/Octicon.astro";
-import Tag from "@/components/Tag.astro";
 
 type Props = {
 	title: string;
 	/** Where the whole card points */
 	href: string;
-	tag?: string | undefined;
-	/** What the card is — a repo unless the thing is not one */
-	icon?: IconName;
 };
 
-const { title, href, tag, icon = "repo" } = Astro.props;
+const { title, href } = Astro.props;
 ---
 
 <li class="card">
 	<div class="card-top">
-		<Octicon name={icon} />
+		<Octicon name="repo" />
 		<h3 class="card-title">
 			<a
 				class="stretched"
@@ -25,18 +20,9 @@ const { title, href, tag, icon = "repo" } = Astro.props;
 				>{title}</a
 			>
 		</h3>
-		{tag && <Tag>{tag}</Tag>}
 	</div>
 
 	<p class="card-description"><slot /></p>
-
-	{
-		Astro.slots.has("links") && (
-			<div class="card-links">
-				<slot name="links" />
-			</div>
-		)
-	}
 
 	<div class="card-meta">
 		<slot name="meta" />
@@ -93,14 +79,6 @@ const { title, href, tag, icon = "repo" } = Astro.props;
 		flex-grow: 1;
 		margin: 0;
 		color: var(--fg-muted);
-	}
-
-	.card-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		font-size: 12px;
-		font-weight: 600;
 	}
 
 	.card-meta {

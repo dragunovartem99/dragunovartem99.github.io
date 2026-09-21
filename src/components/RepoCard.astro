@@ -8,18 +8,16 @@ import type { RepoView } from "@/modules/github";
 
 type Props = {
 	repo: RepoView;
-	tag?: string | undefined;
 };
 
 // A repo with something to show points at the thing itself and keeps a link to
 // the code — otherwise the card is the repo already
-const { repo, tag } = Astro.props;
+const { repo } = Astro.props;
 ---
 
 <Card
 	title={repo.name}
 	href={repo.site ?? repo.url}
-	tag={tag}
 >
 	{repo.description}
 

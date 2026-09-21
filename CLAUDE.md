@@ -14,15 +14,15 @@
 
 - DO keep `src/modules/github` self-contained: `utils/`, `types.ts`, and an `index.ts` barrel exporting only the public surface
 - DO NOT import a module's internals (`utils/`) from outside the module
-- DO let dependencies point one way — page (`pages/`, `components/`, `featured.ts`, `constants.ts`) → `modules/` → `utils/`. A module never imports site config; it takes what it needs as an argument
+- DO let dependencies point one way — page (`pages/`, `components/`, `constants.ts`) → `modules/` → `utils/`. A module never imports site config; it takes what it needs as an argument
 - DO keep `src/utils/` free of anything site-specific: one file per subject (`url.ts`, `time.ts`), pure, importable from anywhere
 - DO put shared page furniture in `src/components/`, page-specific markup and layout in the page itself
-- DO keep everything the page is handpicked from in `src/featured.ts` and `src/constants.ts` — no site content inside components
+- DO keep site config in `src/constants.ts` — no site content inside components; what is featured comes from the profile pins, not from a list here
 
 ## Data
 
 - DO fetch from the GitHub API at build time only — the page ships no client JavaScript and makes no runtime request
-- DO reach the API through `src/modules/github`, which sends `GITHUB_TOKEN` when the environment has one
+- DO reach the API through `src/modules/github`, which sends `GITHUB_TOKEN` when the environment has one — REST works without it, the GraphQL pins query does not
 - DO map a payload into a view type in `modules/github/utils/map/` before it reaches a component — `types.ts` holds both sides, and no `.astro` file reads a snake_case field
 - DO let a missing repo drop its card rather than fail the build; a failing request is a build error and should stay one
 
