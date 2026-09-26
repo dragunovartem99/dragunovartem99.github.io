@@ -12,4 +12,7 @@ export const WEBSITE_URL = "https://dragunov.dev";
 export const HIDDEN_REPOS = new Set([
 	// The profile README, which is prose rather than a project
 	USERNAME,
+	// Image hosting for READMEs and posts, not projects
+	"img1",
+	"img2",
 ]);
