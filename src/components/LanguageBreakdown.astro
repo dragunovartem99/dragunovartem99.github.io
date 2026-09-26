@@ -12,35 +12,33 @@ const { slices } = Astro.props;
 const share = (slice: LanguageSlice) => `${slice.percent.toFixed(1)}%`;
 ---
 
-{
-	slices.length > 0 && (
-		<div class="languages">
-			<h2 class="title">Languages</h2>
+{slices.length > 0 && (
+	<div class="languages">
+		<h2 class="title">Languages</h2>
 
-			<div class="bar">
-				{slices.map((slice) => (
-					<span
-						class="slice"
-						style={{
-							width: `${slice.percent.toFixed(2)}%`,
-							backgroundColor: slice.color,
-						}}
-						title={`${slice.language} ${share(slice)}`}
-					/>
-				))}
-			</div>
-
-			<ul class="legend">
-				{slices.map((slice) => (
-					<li class="item">
-						<LanguageDot color={slice.color} />
-						{slice.language} <span class="share">{share(slice)}</span>
-					</li>
-				))}
-			</ul>
+		<div class="bar">
+			{slices.map((slice) => (
+				<span
+					class="slice"
+					style={{
+						width: `${slice.percent.toFixed(2)}%`,
+						backgroundColor: slice.color,
+					}}
+					title={`${slice.language} ${share(slice)}`}
+				/>
+			))}
 		</div>
-	)
-}
+
+		<ul class="legend">
+			{slices.map((slice) => (
+				<li class="item">
+					<LanguageDot color={slice.color} />
+					{slice.language} <span class="share">{share(slice)}</span>
+				</li>
+			))}
+		</ul>
+	</div>
+)}
 
 <style>
 	.languages {

@@ -16,33 +16,18 @@ const links = [
 ---
 
 <header class="header">
-	<a
-		class="mark"
-		href={href}
-		aria-label="GitHub profile"
-	>
-		<Octicon
-			name="mark"
-			size={28}
-		/>
+	<a class="mark" href={href} aria-label="GitHub profile">
+		<Octicon name="mark" size={28} />
 	</a>
 
 	<span class="title">{login}</span>
 
-	<nav
-		class="nav"
-		aria-label="Sections"
-	>
-		{
-			links.map((link) => (
-				<a
-					class="nav-link"
-					href={link.href}
-				>
-					{link.label}
-				</a>
-			))
-		}
+	<nav class="nav" aria-label="Sections">
+		{links.map((link) => (
+			<a class="nav-link" href={link.href}>
+				{link.label}
+			</a>
+		))}
 	</nav>
 </header>
 
