@@ -19,7 +19,7 @@ jobs:
 
     pipes:
         needs: ci
-        uses: dragunovartem99/pipes/.github/workflows/deploy-github.yaml@v1.0.1
+        uses: dragunovartem99/pipes/.github/workflows/deploy-github.yaml@v1.2.0
         with:
             build-command: build
             dist-folder: ./dist
