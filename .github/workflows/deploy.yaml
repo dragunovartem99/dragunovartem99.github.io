@@ -3,6 +3,7 @@ name: Deploy
 on:
     push:
         branches: ["main"]
+    # Rebuilds daily so the repo list stays current
     schedule:
         - cron: "0 6 * * *"
     workflow_dispatch:
@@ -13,8 +14,12 @@ permissions:
     id-token: write
 
 jobs:
+    ci:
+        uses: ./.github/workflows/ci.yaml
+
     pipes:
-        uses: dragunovartem99/pipes/.github/workflows/deploy.yaml@main
+        needs: ci
+        uses: dragunovartem99/pipes/.github/workflows/deploy-github.yaml@v1.0.1
         with:
             build-command: build
             dist-folder: ./dist

@@ -48,7 +48,7 @@ GITHUB_TOKEN=$(gh auth token) npm run dev
 Site content lives in that last file, never inside a component. Tests sit next to what they
 cover, in `__tests__` beside the `utils/` they exercise.
 
-## Scripts
+## Development
 
 | Script        | Idea                                  |
 | ------------- | ------------------------------------- |
@@ -60,11 +60,12 @@ cover, in `__tests__` beside the `utils/` they exercise.
 | `lint`        | lint the sources, fixing what it can  |
 | `types:check` | type-check the sources and templates  |
 
-`format:check` and `lint:check` are the same passes without the writes — what CI runs.
+`format:check` and `lint:check` are the same passes without the writes. Pull requests run
+`format:check`, `types:check`, `lint:check` and `test`, and so does the pre-commit hook.
 
 `GITHUB_TOKEN` is optional locally and raises the API rate limit when set.
 
-## Deploy
+## Deployment
 
-Pushing to `main` deploys to GitHub Pages via [pipes](https://github.com/dragunovartem99/pipes). A
+Merging to `main` runs the same checks, then deploys to GitHub Pages via [pipes](https://github.com/dragunovartem99/pipes). A
 daily cron rebuilds the page so the repo list stays current.

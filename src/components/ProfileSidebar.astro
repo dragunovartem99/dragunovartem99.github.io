@@ -15,13 +15,7 @@ const { profile, slices } = Astro.props;
 
 <aside class="sidebar">
 	<div class="avatar-frame">
-		<img
-			class="avatar"
-			src={profile.avatarUrl}
-			alt=""
-			width="260"
-			height="260"
-		/>
+		<img class="avatar" src={profile.avatarUrl} alt="" width="260" height="260" />
 	</div>
 
 	{/* Everything the avatar sits beside once the page is too narrow for a column */}
@@ -31,37 +25,31 @@ const { profile, slices } = Astro.props;
 		{profile.bio && <p class="bio">{profile.bio}</p>}
 
 		<div class="actions">
-			<a
-				class="btn btn-primary"
-				href={profile.url}
-			>
+			<a class="btn btn-primary" href={profile.url}>
 				<Octicon name="mark" />
 				Follow on GitHub
 			</a>
-			<a
-				class="btn"
-				href={WEBSITE_URL}
-			>
+			<a class="btn" href={WEBSITE_URL}>
 				<Octicon name="globe" />
 				{shortUrl({ url: WEBSITE_URL })}
 			</a>
 		</div>
 
 		<ul class="details">
-			{
-				profile.location && (
-					<li class="detail">
-						<Octicon name="location" /> {profile.location}
-					</li>
-				)
-			}
+			{profile.location && (
+				<li class="detail">
+					<Octicon name="location" /> {profile.location}
+				</li>
+			)}
 			{/* The icon belongs to the followers link, the way GitHub's own does */}
 			<li class="detail">
-				<a href={`${profile.url}?tab=followers`}
-					><Octicon name="people" /> <strong>{profile.followers}</strong> followers</a
-				>{" · "}<a href={`${profile.url}?tab=following`}
-					><strong>{profile.following}</strong> following</a
-				>
+				<a href={`${profile.url}?tab=followers`}>
+					<Octicon name="people" /> <strong>{profile.followers}</strong> followers
+				</a>
+				{" · "}
+				<a href={`${profile.url}?tab=following`}>
+					<strong>{profile.following}</strong> following
+				</a>
 			</li>
 		</ul>
 

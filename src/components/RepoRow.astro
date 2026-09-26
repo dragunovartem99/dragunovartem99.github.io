@@ -21,24 +21,14 @@ const { repo } = Astro.props;
 
 	<div class="repo-meta">
 		<LanguageMeta language={repo.language} />
-		<Counter
-			icon="star"
-			count={repo.stars}
-			label="stars"
-		/>
-		<Counter
-			icon="repoForked"
-			count={repo.forks}
-			label="forks"
-		/>
-		{
-			repo.license && (
-				<MetaItem>
-					<Octicon name="law" />
-					{repo.license}
-				</MetaItem>
-			)
-		}
+		<Counter icon="star" count={repo.stars} label="stars" />
+		<Counter icon="repoForked" count={repo.forks} label="forks" />
+		{repo.license && (
+			<MetaItem>
+				<Octicon name="law" />
+				{repo.license}
+			</MetaItem>
+		)}
 		<MetaItem>Updated {repo.updated}</MetaItem>
 	</div>
 </li>

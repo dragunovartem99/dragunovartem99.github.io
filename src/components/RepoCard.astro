@@ -15,37 +15,21 @@ type Props = {
 const { repo } = Astro.props;
 ---
 
-<Card
-	title={repo.name}
-	href={repo.site ?? repo.url}
->
+<Card title={repo.name} href={repo.site ?? repo.url}>
 	{repo.description}
 
 	<Fragment slot="meta">
 		<LanguageMeta language={repo.language} />
-		<Counter
-			icon="star"
-			count={repo.stars}
-			label="stars"
-		/>
-		<Counter
-			icon="repoForked"
-			count={repo.forks}
-			label="forks"
-		/>
-		{
-			repo.site && (
-				<MetaItem>
-					<a
-						class="source"
-						href={repo.url}
-					>
-						<Octicon name="mark" />
-						Source
-					</a>
-				</MetaItem>
-			)
-		}
+		<Counter icon="star" count={repo.stars} label="stars" />
+		<Counter icon="repoForked" count={repo.forks} label="forks" />
+		{repo.site && (
+			<MetaItem>
+				<a class="source" href={repo.url}>
+					<Octicon name="mark" />
+					Source
+				</a>
+			</MetaItem>
+		)}
 	</Fragment>
 </Card>
 
