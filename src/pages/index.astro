@@ -8,6 +8,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
 	fetchLanguageBytes,
 	fetchPinned,
+	fetchPrivateRepos,
 	fetchRepos,
 	fetchUser,
 	isShowable,
@@ -18,16 +19,24 @@ import {
 
 // The whole page is one build-time read of the GitHub API — nothing here runs
 // in the browser, and the HTML is as fresh as the last deploy.
-const [user, owned, pinned] = await Promise.all([
+const [user, owned, pinned, unlisted] = await Promise.all([
 	fetchUser({ username: USERNAME }),
 	fetchRepos({ username: USERNAME }),
 	fetchPinned({ username: USERNAME }),
+	fetchPrivateRepos({ username: USERNAME }),
 ]);
 
 // What the API returns is every repo; what this page prints is the page's call
 const repos = owned.filter((repo) => isShowable({ repo, hidden: HIDDEN_REPOS }));
 
-const bytes = await fetchLanguageBytes({ username: USERNAME, repos });
+// Private repos are never printed, but their code is still the account's work,
+// so it counts toward the languages. A description is not asked of them —
+// nobody reads it — but a fork or an archive stays out, as it does above.
+const tallied = unlisted.filter(
+	(repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name),
+);
+
+const bytes = await fetchLanguageBytes({ username: USERNAME, repos: [...repos, ...tallied] });
 
 const now = new Date();
 

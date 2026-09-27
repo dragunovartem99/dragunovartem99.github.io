@@ -4,6 +4,7 @@ export {
 	fetchAvatar,
 	fetchLanguageBytes,
 	fetchPinned,
+	fetchPrivateRepos,
 	fetchRepos,
 	fetchUser,
 } from "./utils/api.ts";

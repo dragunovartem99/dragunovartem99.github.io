@@ -13,6 +13,7 @@ export function repo(overrides: Partial<Repo> = {}): Repo {
 		language: "TypeScript",
 		license: null,
 		name: "layr",
+		owner: { login: "dragunovartem99" },
 		pushed_at: "2026-01-09T12:00:00Z",
 		stargazers_count: 0,
 		topics: [],
