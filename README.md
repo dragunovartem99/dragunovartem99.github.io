@@ -11,7 +11,8 @@ JavaScript, no runtime API calls, so the HTML is as fresh as the last deploy.
 
 The sidebar bar is every language across those repos by share of bytes — what
 `/repos/{owner}/{repo}/languages` reports, which costs one request per repo. Bytes are the closest
-thing the API offers to lines of code.
+thing the API offers to lines of code. Private repos count toward it too — never listed, but their
+code is still mine — minus forks, archives and `HIDDEN_REPOS`.
 
 A repo shows up when it is public, not a fork, not archived, and has a description — everything else
 is considered work in progress. `HIDDEN_REPOS` in `src/constants.ts` drops the rest by name, the
@@ -26,8 +27,11 @@ homepage when it has one, with the code under "Source", and takes its text from 
 description. Featured repos are lifted out of the list below, and a pin the page would not show
 anyway — hidden, archived, undescribed — is skipped.
 
-Pins are only exposed through the GraphQL API, which takes no anonymous requests, so the build
-needs `GITHUB_TOKEN`. The deploy workflow passes its own; locally, borrow the GitHub CLI's:
+Pins are only exposed through the GraphQL API, which takes no anonymous requests, and private repos
+through `/user/repos`, which answers for whoever holds the token — so the build needs a
+`GITHUB_TOKEN` issued to the account itself. The Actions token sees only this repo, so the workflows
+pass `PROFILE_TOKEN` instead: a fine-grained personal access token with read access to metadata on
+all repositories. Locally, borrow the GitHub CLI's:
 
 ```sh
 GITHUB_TOKEN=$(gh auth token) npm run dev
@@ -62,8 +66,6 @@ cover, in `__tests__` beside the `utils/` they exercise.
 
 `format:check` and `lint:check` are the same passes without the writes. Pull requests run
 `format:check`, `types:check`, `lint:check` and `test`, and so does the pre-commit hook.
-
-`GITHUB_TOKEN` is optional locally and raises the API rate limit when set.
 
 ## Deployment
 

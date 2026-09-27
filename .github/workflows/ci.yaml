@@ -10,4 +10,4 @@ jobs:
         with:
             checks: '["format:check", "types:check", "lint:check", "test", "build"]'
         secrets:
-            build-env: '{"GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"}'
+            build-env: '{"GITHUB_TOKEN": "${{ secrets.PROFILE_TOKEN }}"}'

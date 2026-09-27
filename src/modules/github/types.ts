@@ -27,6 +27,7 @@ export type Repo = {
 	language: string | null;
 	license: { spdx_id: string } | null;
 	name: string;
+	owner: { login: string };
 	pushed_at: string;
 	stargazers_count: number;
 	topics: string[];
@@ -44,7 +45,7 @@ export type Pinned = {
 /** Bytes of code per language, as GitHub's linguist counts them */
 export type LanguageBytes = Record<string, number>;
 
-/** One language's share of every public repo, ready to draw */
+/** One language's share of every tallied repo, ready to draw */
 export type LanguageSlice = {
 	bytes: number;
 	color: string;

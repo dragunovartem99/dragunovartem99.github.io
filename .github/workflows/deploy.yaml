@@ -20,4 +20,4 @@ jobs:
             build-command: build
             dist-folder: ./dist
         secrets:
-            build-env: '{"GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"}'
+            build-env: '{"GITHUB_TOKEN": "${{ secrets.PROFILE_TOKEN }}"}'

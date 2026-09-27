@@ -38,6 +38,19 @@ export async function fetchRepos({ username }: { username: string }): Promise<Re
 	return repos.toSorted((a, b) => b.pushed_at.localeCompare(a.pushed_at));
 }
 
+// Every private repo the account owns. There is no public door to these:
+// `/user/repos` answers for whoever holds the token, so it takes one issued to
+// the account itself — a personal access token, not the Actions GITHUB_TOKEN,
+// which sees nothing beyond the repo running the workflow. A token from some
+// other account would list that account's repos, hence the owner check.
+export async function fetchPrivateRepos({ username }: { username: string }): Promise<Repo[]> {
+	const repos = await api<Repo[]>({
+		path: "/user/repos?per_page=100&affiliation=owner&visibility=private",
+	});
+
+	return repos.filter((repo) => repo.owner.login === username);
+}
+
 // One request per repo, summed into a single tally. Bytes are what the API
 // offers — lines of code are not exposed anywhere.
 export async function fetchLanguageBytes({
