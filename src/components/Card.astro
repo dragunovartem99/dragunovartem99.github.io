@@ -14,7 +14,10 @@ const { title, href } = Astro.props;
 	<div class="card-top">
 		<Octicon name="repo" />
 		<h3 class="card-title">
-			<a class="stretched" href={href}>
+			<a
+				class="stretched"
+				href={href}
+			>
 				{title}
 			</a>
 		</h3>
