@@ -33,7 +33,7 @@ const repos = owned.filter((repo) => isShowable({ repo, hidden: HIDDEN_REPOS }))
 // so it counts toward the languages. A description is not asked of them —
 // nobody reads it — but a fork or an archive stays out, as it does above.
 const tallied = unlisted.filter(
-	(repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name),
+	(repo) => !repo.fork && !repo.archived && !HIDDEN_REPOS.has(repo.name)
 );
 
 const bytes = await fetchLanguageBytes({ username: USERNAME, repos: [...repos, ...tallied] });
@@ -66,7 +66,10 @@ const rest = repos
 	profile={profile}
 	now={now}
 >
-	<ProfileSidebar profile={profile} slices={languageBreakdown({ bytes })} />
+	<ProfileSidebar
+		profile={profile}
+		slices={languageBreakdown({ bytes })}
+	/>
 
 	<div class="content">
 		{featured.length > 0 && (
