@@ -26,10 +26,8 @@ export async function api<T>({ path }: { path: string }): Promise<T> {
 	return response.json() as Promise<T>;
 }
 
-// GraphQL is the only door to the profile pins, and it takes no anonymous
-// callers — so unlike the REST calls in `api`, this one needs GITHUB_TOKEN.
-// GitHub answers a failed query with a 200 and an `errors` list, which counts
-// as a failed request all the same.
+// Profile pins are GraphQL-only, which rejects anonymous calls — needs GITHUB_TOKEN.
+// A failed query comes back as 200 with an `errors` list; treat it as a failure.
 export async function graphql<T>({
 	query,
 	variables,

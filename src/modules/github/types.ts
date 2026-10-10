@@ -1,9 +1,5 @@
-/**
- * Two sets of types. The first is the slices of GitHub's payloads this
- * page actually reads — snake_case, shaped by the API. The second is what a
- * component prints, mapped from the first in `utils/map/`, so a rename on
- * GitHub's side stops at the mapper instead of reaching the markup.
- */
+// GitHub payload slices (snake_case) first, then what components print —
+// mapped in `utils/map/`, so a GitHub rename stops at the mapper.
 
 export type User = {
 	avatar_url: string;
