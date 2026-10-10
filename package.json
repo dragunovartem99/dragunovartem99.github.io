@@ -35,7 +35,7 @@
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",
 		"@dragunovartem99/oxfmt-config": "^2.2.0",
-		"@dragunovartem99/oxlint-config": "^3.0.1",
+		"@dragunovartem99/oxlint-config": "^3.1.0",
 		"@types/node": "^24.11.0",
 		"husky": "^9.1.7",
 		"prettier": "^3.9.9",
