@@ -3,10 +3,8 @@ import { api, graphql } from "./http.ts";
 
 const profiles = new Map<string, Promise<User>>();
 
-// The profile behind the sidebar. Both the page and the favicon route want it,
-// and a build is a single process, so the request is made once and shared.
-// A dev server is one process too, so an edit to the profile only shows up on
-// restart — which is what a build-time page means anyway.
+// Fetched once per process and shared by the page and the favicon route,
+// so in dev a profile edit only shows up after a restart.
 export function fetchUser({ username }: { username: string }): Promise<User> {
 	const pending = profiles.get(username) ?? api<User>({ path: `/users/${username}` });
 	profiles.set(username, pending);
@@ -38,11 +36,9 @@ export async function fetchRepos({ username }: { username: string }): Promise<Re
 	return repos.toSorted((a, b) => b.pushed_at.localeCompare(a.pushed_at));
 }
 
-// Every private repo the account owns. There is no public door to these:
-// `/user/repos` answers for whoever holds the token, so it takes one issued to
-// the account itself — a personal access token, not the Actions GITHUB_TOKEN,
-// which sees nothing beyond the repo running the workflow. A token from some
-// other account would list that account's repos, hence the owner check.
+// `/user/repos` answers for the token's holder, so this needs the account's own
+// PAT — the Actions GITHUB_TOKEN sees only its repo. Another account's token
+// would list its repos, hence the owner check.
 export async function fetchPrivateRepos({ username }: { username: string }): Promise<Repo[]> {
 	const repos = await api<Repo[]>({
 		path: "/user/repos?per_page=100&affiliation=owner&visibility=private",
